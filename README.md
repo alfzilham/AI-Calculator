@@ -35,10 +35,10 @@ AICalculator/
 │   └── favicon/                  # Site icon
 ├── docs/
 │   ├── ARCHITECTURE.md           # Technical architecture
+│   ├── CHANGELOG.md              # Release history
 │   ├── CONTEXT.md                # Project context & decisions
 │   ├── DESIGN.md                 # Full design documentation
 │   └── SPEC.md                   # Functional specification
-├── CHANGELOG.md                  # Release history
 └── README.md
 ```
 
@@ -66,6 +66,6 @@ AICalculator/
 This project enforces two mandatory rules for all agent sessions, defined in `.opencode/AGENT.md`:
 
 1. **Git workflow** — every completed implementation is committed with a conventional commit message (`feat:`/`fix:`/`chore:`/`docs:`/`refactor:`) and pushed to `origin/main`.
-2. **Documentation sync** — every feature or code change updates `README.md`, `CHANGELOG.md`, and the relevant files under `docs/` (`DESIGN.md`, `ARCHITECTURE.md`, `SPEC.md`, `CONTEXT.md`).
+2. **Documentation sync** — every feature or code change updates `README.md`, `docs/CHANGELOG.md`, and the relevant files under `docs/` (`DESIGN.md`, `ARCHITECTURE.md`, `SPEC.md`, `CONTEXT.md`).
 
 The `.opencode/` folder is intentionally excluded from version control (local project config and rules).

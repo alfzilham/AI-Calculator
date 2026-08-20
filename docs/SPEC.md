@@ -213,4 +213,4 @@ Manual test checklist. Each row maps to the requirements above.
 | `docs/DESIGN.md`      | Visual rationale behind tokens, shader, and interactions. |
 | `docs/ARCHITECTURE.md`| Code structure and data flow implementing these requirements. |
 | `docs/CONTEXT.md`     | Why the decisions behind this spec were made.           |
-| `CHANGELOG.md`        | When each requirement was introduced or fixed.          |
+| `docs/CHANGELOG.md`   | When each requirement was introduced or fixed.          |

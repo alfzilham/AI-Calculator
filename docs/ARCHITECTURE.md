@@ -60,10 +60,10 @@ AICalculator/
 │   └── favicon/                  # favicon.ico
 ├── docs/
 │   ├── ARCHITECTURE.md           # This document
+│   ├── CHANGELOG.md              # Release history
 │   ├── CONTEXT.md                # Project context & decisions
 │   ├── DESIGN.md                 # Visual/UX design documentation
 │   └── SPEC.md                   # Functional & non-functional specification
-├── CHANGELOG.md                  # Release history
 └── README.md                     # Project overview
 ```
 
@@ -273,4 +273,4 @@ stateDiagram-v2
 | `docs/DESIGN.md`      | Visual/UX design, tokens, shader details.           |
 | `docs/SPEC.md`        | Functional & non-functional specification + test matrix. |
 | `docs/CONTEXT.md`     | Project context, decisions (ADRs), conventions.     |
-| `CHANGELOG.md`        | Release history.                                    |
+| `docs/CHANGELOG.md`   | Release history.                                    |

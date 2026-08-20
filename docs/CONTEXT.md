@@ -144,7 +144,7 @@ gitGraph
     commit id: "meta" tag: "chore: align index.html meta description"
 ```
 
-Full chronological detail with dated releases lives in `CHANGELOG.md`.
+Full chronological detail with dated releases lives in `docs/CHANGELOG.md`.
 
 ---
 
@@ -168,4 +168,4 @@ Full chronological detail with dated releases lives in `CHANGELOG.md`.
 | `docs/DESIGN.md`      | Visual/UX design, tokens, shader details.        |
 | `docs/ARCHITECTURE.md`| Code structure, data flow, state machine.        |
 | `docs/SPEC.md`        | Testable requirements and verification matrix.   |
-| `CHANGELOG.md`        | Release history.                                 |
+| `docs/CHANGELOG.md`    | Release history.                                 |
