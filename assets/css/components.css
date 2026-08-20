@@ -134,10 +134,19 @@ body[data-theme="light"] .icon-sun {
   transform: scale(0.94);
 }
 
-.btn-zero {
-  grid-column: span 2;
-  text-align: left;
-  padding-left: 28px;
+.btn-equals {
+  grid-row: span 2;
+}
+
+/* Ikon backspace (SVG inline) */
+.btn[data-action="backspace"] svg {
+  width: 26px;
+  height: 26px;
+  stroke: currentColor;
+  fill: none;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
 }
 
 /* ===== Number / function buttons (Claymorphism) ===== */
