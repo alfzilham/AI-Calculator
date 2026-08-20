@@ -11,8 +11,8 @@
     padding: 18px 14px 22px;
   }
 
-  .result {
-    font-size: 40px;
+  :root {
+    --result-font-size: 40px;
   }
 
   .btn {

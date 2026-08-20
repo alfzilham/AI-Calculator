@@ -97,7 +97,7 @@ body[data-theme="light"] .icon-sun {
 }
 
 .result {
-  font-size: 48px;
+  font-size: var(--result-font-size);
   font-weight: 600;
   line-height: 1.1;
   letter-spacing: -0.5px;

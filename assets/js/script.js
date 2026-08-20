@@ -80,6 +80,20 @@ function formatNumber(numStr) {
 
 function updateDisplay() {
   resultEl.textContent = formatNumber(current);
+  fitResultFont();
+}
+
+/* Mengecilkan font hasil secara progresif agar angka panjang tetap terlihat
+   (tidak terpotong ellipsis). Base size diambil dari --result-font-size. */
+function fitResultFont() {
+  const base = parseFloat(getComputedStyle(document.documentElement).getPropertyValue("--result-font-size")) || 48;
+  const len = resultEl.textContent.length;
+  let scale = 1;
+  if (len > 18) scale = 0.45;
+  else if (len > 15) scale = 0.56;
+  else if (len > 12) scale = 0.69;
+  else if (len > 9) scale = 0.83;
+  resultEl.style.fontSize = Math.round(base * scale) + "px";
 }
 
 function updateHistory(text) {
