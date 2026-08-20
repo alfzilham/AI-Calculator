@@ -58,3 +58,12 @@ AICalculator/
 - **`backdrop-filter`**: without support, the card renders as a semi-transparent color without blur (safe degradation).
 - **`prefers-reduced-motion`** is respected: wave animation is disabled and CSS transitions are removed.
 - No external dependencies (theme icons inlined as SVG).
+
+## Development Rules
+
+This project enforces two mandatory rules for all agent sessions, defined in `.opencode/AGENT.md`:
+
+1. **Git workflow** — every completed implementation is committed with a conventional commit message (`feat:`/`fix:`/`chore:`/`docs:`/`refactor:`) and pushed to `origin/main`.
+2. **Documentation sync** — every feature or code change updates `README.md`, `CHANGELOG.md`, and the relevant files under `docs/` (`DESIGN.md`, `ARCHITECTURE.md`, `SPEC.md`, `CONTEXT.md`).
+
+The `.opencode/` folder is intentionally excluded from version control (local project config and rules).
