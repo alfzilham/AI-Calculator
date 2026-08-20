@@ -147,6 +147,43 @@ function percent() {
   updateDisplay();
 }
 
+function clearEntry() {
+  current = "0";
+  justEvaluated = false;
+  updateDisplay();
+}
+
+function deleteLast() {
+  if (justEvaluated) {
+    clearAll();
+    return;
+  }
+  current = current.length > 1 ? current.slice(0, -1) : "0";
+  if (current === "-" || current === "-0") current = "0";
+  updateDisplay();
+}
+
+function square() {
+  if (current === "Error") return;
+  const result = parseFloat(current) * parseFloat(current);
+  current = Number.isFinite(result) ? trimResult(result) : "Error";
+  justEvaluated = true;
+  updateDisplay();
+}
+
+function sqrt() {
+  if (current === "Error") return;
+  const val = parseFloat(current);
+  if (val < 0) {
+    current = "Error";
+    updateDisplay();
+    return;
+  }
+  current = Number.isFinite(Math.sqrt(val)) ? trimResult(Math.sqrt(val)) : "Error";
+  justEvaluated = true;
+  updateDisplay();
+}
+
 function compute(a, b, op) {
   const x = parseFloat(a);
   const y = parseFloat(b);
@@ -228,6 +265,14 @@ buttons.forEach((btn) => {
       negate();
     } else if (action === "percent") {
       percent();
+    } else if (action === "clear-entry") {
+      clearEntry();
+    } else if (action === "backspace") {
+      deleteLast();
+    } else if (action === "square") {
+      square();
+    } else if (action === "sqrt") {
+      sqrt();
     } else if (action === "decimal") {
       inputDecimal();
     } else if (action === "equals") {
@@ -286,13 +331,8 @@ document.addEventListener("keydown", (e) => {
     percent();
     flashButton('[data-action="percent"]');
   } else if (e.key === "Backspace") {
-    if (justEvaluated) {
-      clearAll();
-    } else {
-      current = current.length > 1 ? current.slice(0, -1) : "0";
-      if (current === "-" || current === "-0") current = "0";
-      updateDisplay();
-    }
+    deleteLast();
+    flashButton('[data-action="backspace"]');
   } else if (
     e.key === " " ||
     e.key.startsWith("Arrow") ||
