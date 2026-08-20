@@ -91,7 +91,7 @@ AICalculator/
 | Element                | Size                               | Weight | Notes                                                                                      |
 | ---------------------- | ---------------------------------- | ------ | ------------------------------------------------------------------------------------------ |
 | Font family            | —                                  | —      | System font stack: `-apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", Roboto, Helvetica, Arial, sans-serif` |
-| Result (`.result`)     | `48px` (→ `40px` on small screens) | `600`  | `letter-spacing: -0.5px`, `line-height: 1.1`                                                |
+| Result (`.result`)     | `48px` (→ `40px` on small screens) | `600`  | `letter-spacing: -0.5px`, `line-height: 1.1`; font scales down automatically via `--result-font-size` + `fitResultFont()` so long numbers never truncate |
 | History (`.history`)   | `15px`                             | `400`  | Ellipsis overflow for long expressions                                                      |
 | Number/function buttons| `24px` (→ `21px`)                  | `500`  | —                                                                                           |
 | Operator buttons       | `24px` (→ `21px`)                  | `600`  | Slightly bolder than numbers                                                                 |

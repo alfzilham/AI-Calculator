@@ -74,6 +74,12 @@ Concise decision log. See `docs/ARCHITECTURE.md` for the resulting structure and
 - **Decision:** Guard both functions to be no-ops while `current === "Error"`; operators/digits/clear already reset cleanly.
 - **Consequence:** The calculator can never show garbage after an error.
 
+### ADR-007 — Dynamic result font scaling
+
+- **Context:** A 12-digit number (e.g. `888,888,888,888`) overflowed the `.result` display at 48px and was truncated with an ellipsis.
+- **Decision:** Introduce `--result-font-size` (48px, overridden to 40px on small screens) and a `fitResultFont()` helper that progressively scales the font based on the formatted length.
+- **Consequence:** Numbers up to the 12-digit input cap are always fully visible; `text-overflow: ellipsis` remains only as a safety net.
+
 ---
 
 ## 4. Conventions

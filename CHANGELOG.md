@@ -7,7 +7,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-- Planned enhancements for future releases.
+### Fixed
+
+- Long numbers (≥10 digits) no longer truncate with an ellipsis — the result font now scales down progressively (`fitResultFont()` + `--result-font-size`) so all digits remain visible, e.g. `888,888,888,888`.
 
 ## [0.1.0] - 2026-08-20
 

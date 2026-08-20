@@ -152,6 +152,7 @@ flowchart LR
 | `applyThemeMeta`    | Syncs `<meta name="theme-color">` with the active theme.                  |
 | `syncWavesTheme`    | Pushes the theme's wave colors into the WebGL instance via `setColors`.   |
 | `flashButton`       | Adds a transient `.btn-pressed` highlight to the button matching a key.   |
+| `fitResultFont`     | Progressively scales the result font (via `--result-font-size`) so long numbers are always fully visible. |
 
 ### 4.2 `gradient-waves.js` — Self-contained WebGL2 Background
 

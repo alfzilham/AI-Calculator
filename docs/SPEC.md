@@ -59,6 +59,7 @@ The app is a single-page calculator supporting the four basic arithmetic operati
 | FR-18 | Results are capped at 8 decimal places with trailing zeros trimmed (`0.1+0.2` → `0.3`).              | `trimResult()`     |
 | FR-19 | Results larger than 12 digits fall back to 10 significant figures (`toPrecision(10)`).                | `trimResult()`     |
 | FR-20 | `Error` is never passed through the number formatter (guarded at the source).                         | `equals()` / `compute()` |
+| FR-31 | The result font scales down automatically (`--result-font-size` + `fitResultFont()`) so numbers up to 12 digits are always fully visible without ellipsis truncation. | `fitResultFont()` |
 
 ### 2.5 Themes
 
@@ -188,6 +189,7 @@ Manual test checklist. Each row maps to the requirements above.
 | 18 | Tab through buttons                                              | Visible focus ring; Enter/Space activate buttons         | FR-27/29  |
 | 19 | DevTools device mode; tap buttons                                | No virtual keyboard appears; calculator usable           | FR-30/NFR |
 | 20 | Disable WebGL2 (browser flag)                                    | Solid background, calculator still works, warning logged | NFR-02    |
+| 21 | Enter 12 digits (`888888888888`)                                  | Full number visible, font shrinks, no `...`              | FR-31     |
 
 ---
 
