@@ -103,7 +103,7 @@ AICalculator/
 | Calculator card            | `44px` (→ `36px` small mobile)  | `22px 18px 26px`                |
 | Buttons (general)          | `20px` (→ `18px` small mobile)  | `20px 0` vertical                |
 | Theme button               | `16px`                          | `44×44px` fixed                 |
-| Button grid                | —                               | `gap: 10px`, 4 columns          |
+| Button grid                | —                               | `gap: 10px`, 4 columns × 6 rows |
 | `0` button (span 2 cols)   | same as general                 | `padding-left: 28px`, left-aligned |
 
 ---
@@ -227,7 +227,7 @@ The waves react subtly to the cursor position (`pointermove` across the whole wi
 
 ### 5.3 Calculator Logic
 
-Standard operations: `+`, `−`, `×`, `÷`, `%`, negate (`+/-`), decimal, and clear (`C`). The expression history (`.history`) shows the first operand + operator when an operator is chosen, then the full expression on `=` — mimicking the iOS Calculator pattern in the reference image.
+Standard operations: `+`, `−`, `×`, `÷`, `%`, negate (`+/-`), decimal, and clear (`C`). Convenience buttons: backspace (`⌫`, deletes the last digit), clear entry (`CE`, clears only the current entry), square (`×²`) and square root (`√`) as unary operations (both produce a complete result and start the next entry fresh; `√` of a negative number yields `Error`). The expression history (`.history`) shows the first operand + operator when an operator is chosen, then the full expression on `=` — mimicking the iOS Calculator pattern in the reference image.
 
 Number formatting uses automatic thousands separators (`,`) via `formatNumber()`, and decimal results are precision-capped (`toFixed(8)` then trimmed) to avoid floating-point artifacts like `0.1 + 0.2 = 0.30000000000000004`.
 

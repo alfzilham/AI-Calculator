@@ -5,6 +5,7 @@ A **vanilla HTML/CSS/JS** calculator with no framework and no build tools. Inspi
 ## Features
 
 - Basic operations: `+`, `−`, `×`, `÷`, percent (`%`), negation (`+/-`), decimal, and clear (`C`)
+- Convenience buttons: backspace (`⌫`), clear entry (`CE`), square (`×²`), and square root (`√`)
 - Two themes: **dark** & **light**, toggled via the theme icon in the top-left corner
 - **Gradient waves** background reactive to the cursor (parallax) — automatically stops when the tab is inactive or the canvas is off-screen
 - Number formatting with thousands separators, result precision capped to avoid floating-point artifacts

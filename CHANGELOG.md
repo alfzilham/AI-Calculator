@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- Backspace button (`⌫`) to delete the last digit on touch devices (previously keyboard-only).
+- Clear Entry button (`CE`) that clears only the current entry while keeping the pending operator and history.
+- Square (`×²`) and square root (`√`) buttons as unary operations.
+
 ### Fixed
 
 - Long numbers (≥10 digits) no longer truncate with an ellipsis — the result font now scales down progressively (`fitResultFont()` + `--result-font-size`) so all digits remain visible, e.g. `888,888,888,888`.

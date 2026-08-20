@@ -145,6 +145,10 @@ flowchart LR
 | `clearAll`          | Resets all state to the initial "0".                                      |
 | `negate`            | Toggles the sign; ignored in the `Error` state.                           |
 | `percent`           | Divides the current value by 100; ignored in the `Error` state.           |
+| `clearEntry`        | Resets the current entry to `0` without touching the pending operator/history. |
+| `deleteLast`        | Removes the last digit (falls back to `0`); clears everything after an evaluation. |
+| `square`            | Squares the current value; ignored in the `Error` state.                  |
+| `sqrt`              | Square root of the current value; negative input yields `Error`.          |
 | `compute`           | Pure arithmetic over two operands; returns `NaN` on division by zero.     |
 | `chooseOperator`    | Resolves a pending operation (chaining), stores the new operator.         |
 | `equals`            | Evaluates, formats the result (or `Error`), clears the pending operator.  |

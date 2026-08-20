@@ -80,6 +80,12 @@ Concise decision log. See `docs/ARCHITECTURE.md` for the resulting structure and
 - **Decision:** Introduce `--result-font-size` (48px, overridden to 40px on small screens) and a `fitResultFont()` helper that progressively scales the font based on the formatted length.
 - **Consequence:** Numbers up to the 12-digit input cap are always fully visible; `text-overflow: ellipsis` remains only as a safety net.
 
+### ADR-008 — Convenience buttons and 4×6 grid layout
+
+- **Context:** Touch users had no way to delete a single digit (backspace was keyboard-only) and lacked quick unary operations.
+- **Decision:** Add backspace (`⌫`), clear entry (`CE`), square (`×²`), and square root (`√`) buttons, and re-layout the grid to 4 columns × 6 rows (24 cells) with `0` still spanning two columns.
+- **Consequence:** Mobile deletion and quick operations are now on-screen; the extra row slightly increases the card height. `deleteLast()` reuses the same logic as the existing Backspace key, so keyboard and touch stay in sync.
+
 ---
 
 ## 4. Conventions

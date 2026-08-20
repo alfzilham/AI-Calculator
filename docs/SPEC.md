@@ -86,6 +86,15 @@ The app is a single-page calculator supporting the four basic arithmetic operati
 | FR-29 | Focus is visible via an orange `:focus-visible` ring.                                                 | `components.css`           |
 | FR-30 | Page zoom is not blocked (no `maximum-scale` restriction in the viewport).                            | `index.html`               |
 
+### 2.8 Convenience Buttons
+
+| ID    | Requirement                                                                                          | Implementation |
+| ----- | ---------------------------------------------------------------------------------------------------- | -------------- |
+| FR-32 | `⌫` deletes the last digit; falls back to `0`; after an evaluation it clears everything.             | `deleteLast()` |
+| FR-33 | `CE` clears only the current entry, preserving the pending operator and history.                     | `clearEntry()` |
+| FR-34 | `×²` squares the current value; ignored in the `Error` state; produces a fresh result.               | `square()`     |
+| FR-35 | `√` computes the square root; a negative value yields `Error`; produces a fresh result.              | `sqrt()`       |
+
 ---
 
 ## 3. Non-Functional Requirements
@@ -190,6 +199,10 @@ Manual test checklist. Each row maps to the requirements above.
 | 19 | DevTools device mode; tap buttons                                | No virtual keyboard appears; calculator usable           | FR-30/NFR |
 | 20 | Disable WebGL2 (browser flag)                                    | Solid background, calculator still works, warning logged | NFR-02    |
 | 21 | Enter 12 digits (`888888888888`)                                  | Full number visible, font shrinks, no `...`              | FR-31     |
+| 22 | Enter `123`, press `⌫`                                            | Display `12`                                             | FR-32     |
+| 23 | Enter `5`, `+`, `7`, press `CE`, then `3`, `=`                    | Result `8` (CE preserved `5 +`)                           | FR-33     |
+| 24 | Enter `12`, press `×²`                                            | Display `144`                                            | FR-34     |
+| 25 | Enter `16`, press `√`; then `9`, `+/-`, `√`                       | Display `4`; then `Error`                                | FR-35     |
 
 ---
 
