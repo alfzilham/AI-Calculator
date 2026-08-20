@@ -1,56 +1,60 @@
 # AICalculator
 
-Kalkulator berbasis **HTML/CSS/JS vanilla** tanpa framework dan tanpa build tool. Terinspirasi desain iOS Calculator, memadukan **Claymorphism** (tombol) + **Glassmorphism** (kartu) di atas background animasi **Gradient Waves (WebGL2)**.
+A **vanilla HTML/CSS/JS** calculator with no framework and no build tools. Inspired by the iOS Calculator design, blending **Claymorphism** (buttons) + **Glassmorphism** (card) over an animated **Gradient Waves (WebGL2)** background.
 
-## Fitur
+## Features
 
-- Operasi dasar: `+`, `−`, `×`, `÷`, persen (`%`), negasi (`+/-`), desimal, dan clear (`C`)
-- Dua tema: **dark** & **light**, di-toggle lewat ikon tema di pojok kiri atas
-- Background **gradient waves** reaktif terhadap kursor (parallax) — berhenti otomatis saat tab tidak aktif / canvas keluar layar
-- Format angka dengan pemisah ribuan, presisi hasil dibatasi untuk menghindari artefak floating-point
-- Dukungan keyboard penuh
-- Responsif (mobile-first)
+- Basic operations: `+`, `−`, `×`, `÷`, percent (`%`), negation (`+/-`), decimal, and clear (`C`)
+- Two themes: **dark** & **light**, toggled via the theme icon in the top-left corner
+- **Gradient waves** background reactive to the cursor (parallax) — automatically stops when the tab is inactive or the canvas is off-screen
+- Number formatting with thousands separators, result precision capped to avoid floating-point artifacts
+- Full keyboard support
+- Responsive (mobile-first)
 
-## Menjalankan
+## Running
 
-Buka `index.html` langsung di browser (tanpa server, tanpa install). Untuk pengalaman terbaik gunakan browser yang mendukung WebGL2.
+Open `index.html` directly in a browser (no server, no install). For the best experience use a browser that supports WebGL2.
 
-## Struktur File
+## File Structure
 
 ```
 AICalculator/
-├── index.html                    # Halaman utama (struktur + meta)
+├── index.html                    # Main page (structure + meta)
 ├── assets/
 │   ├── css/
 │   │   ├── variable.css          # Design tokens (CSS custom properties)
 │   │   ├── global.css            # Reset + base layout + waves
-│   │   ├── components.css        # Kartu, display, tombol
+│   │   ├── components.css        # Card, display, buttons
 │   │   ├── responsive.css        # Media queries
-│   │   └── style.css             # Entry point (@import semua modul)
+│   │   └── style.css             # Entry point (@imports all modules)
 │   ├── js/
-│   │   ├── gradient-waves.js     # Modul WebGL2 mandiri (IIFE → window.GradientWaves)
-│   │   └── script.js             # Logika kalkulator + kontrol tema + init waves
-│   └── favicon/                  # Ikon situs
+│   │   ├── gradient-waves.js     # Standalone WebGL2 module (IIFE → window.GradientWaves)
+│   │   └── script.js             # Calculator logic + theme control + waves init
+│   └── favicon/                  # Site icon
 ├── docs/
-│   └── DESIGN.md                 # Dokumentasi desain lengkap
+│   ├── ARCHITECTURE.md           # Technical architecture
+│   ├── CONTEXT.md                # Project context & decisions
+│   ├── DESIGN.md                 # Full design documentation
+│   └── SPEC.md                   # Functional specification
+├── CHANGELOG.md                  # Release history
 └── README.md
 ```
 
-## Shortcut Keyboard
+## Keyboard Shortcuts
 
-| Tombol Fisik  | Aksi                 |
-| ------------- | -------------------- |
-| `0–9`         | Input angka          |
-| `.`           | Desimal              |
-| `+ - * /`     | Operator             |
-| `Enter` / `=` | Hitung hasil         |
-| `Escape`      | Clear all            |
-| `%`           | Persen               |
-| `Backspace`   | Hapus digit terakhir |
+| Physical Key | Action              |
+| ------------ | ------------------- |
+| `0–9`        | Input digit         |
+| `.`          | Decimal             |
+| `+ - * /`    | Operator            |
+| `Enter` / `=` | Evaluate result     |
+| `Escape`     | Clear all           |
+| `%`          | Percent             |
+| `Backspace`  | Delete last digit   |
 
-## Catatan Teknis
+## Technical Notes
 
-- **WebGL2 required** untuk background animasi; jika tidak didukung, background solid tetap tampil dan kalkulator tetap berfungsi penuh.
-- **`backdrop-filter`**: tanpa dukungan, kartu tampil sebagai warna semi-transparan tanpa blur (degradasi aman).
-- **`prefers-reduced-motion`** dihormati: animasi waves dimatikan dan transisi CSS ditiadakan.
-- Tanpa dependensi eksternal (ikon tema di-inline sebagai SVG).
+- **WebGL2 required** for the animated background; if unsupported, a solid background is shown and the calculator remains fully functional.
+- **`backdrop-filter`**: without support, the card renders as a semi-transparent color without blur (safe degradation).
+- **`prefers-reduced-motion`** is respected: wave animation is disabled and CSS transitions are removed.
+- No external dependencies (theme icons inlined as SVG).
