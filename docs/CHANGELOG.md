@@ -16,7 +16,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 
 - Reworked the button grid layout: `0` no longer spans two columns (it is a normal-width button), `+/-` moved to the left of `0`, and `=` now spans two rows for an iOS-style tall equals button.
-- Backspace now uses an inline SVG icon (Lucide `delete` path) instead of the `⌫` text glyph — keeping the zero-dependency, offline-friendly approach.
+- Backspace now uses an inline SVG icon (Lucide `delete` path) instead of the `⌫` text glyph — keeping the zero-dependency, offline-friendly approach. The icon is sized with `1em` so it exactly matches the button labels at every breakpoint.
 
 ### Fixed
 
