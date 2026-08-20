@@ -1,0 +1,296 @@
+const resultEl = document.getElementById("result");
+const historyEl = document.getElementById("history");
+const buttons = document.querySelectorAll(".btn");
+const themeToggle = document.getElementById("themeToggle");
+const body = document.body;
+const wavesBg = document.getElementById("wavesBg");
+const themeColorMeta = document.querySelector('meta[name="theme-color"]');
+
+/* Gradient Waves background - orange accent theme, synced with dark/light mode */
+const wavesThemes = {
+  dark: {
+    horizonColor: "#1a1108",
+    waveColor: "#7a3d0f",
+    crestColor: "#ffb347",
+  },
+  light: {
+    horizonColor: "#f4e3c8",
+    waveColor: "#f2a43a",
+    crestColor: "#ffe0a3",
+  },
+};
+
+const themeColorMap = { dark: "#17140f", light: "#efe9dd" };
+
+function applyThemeMeta(theme) {
+  if (themeColorMeta) {
+    themeColorMeta.setAttribute("content", themeColorMap[theme] || themeColorMap.dark);
+  }
+}
+
+function syncWavesTheme(theme) {
+  if (!wavesInstance) return;
+  const t = wavesThemes[theme] || wavesThemes.dark;
+  wavesInstance.setColors(t.horizonColor, t.waveColor, t.crestColor);
+}
+
+const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+let wavesInstance = null;
+if (window.GradientWaves) {
+  wavesInstance = window.GradientWaves(wavesBg, {
+    horizonColor: wavesThemes.dark.horizonColor,
+    waveColor: wavesThemes.dark.waveColor,
+    crestColor: wavesThemes.dark.crestColor,
+    speed: 0.35,
+    amplitude: 2.2,
+    waveScale: 0.55,
+    waveRatio: 0.9,
+    swell: 30,
+    turbulence: 16,
+    tilt: 1.15,
+    zoom: 1.05,
+    height: 5.5,
+    fogDepth: 15,
+    detail: "medium",
+    brightness: 1.0,
+    opacity: 0.9,
+    mouseInteraction: !reduceMotion,
+    parallaxStrength: 0.4,
+    grain: true,
+    grainIntensity: 0.04,
+  });
+}
+
+let current = "0";
+let previous = null;
+let operator = null;
+let justEvaluated = false;
+
+function formatNumber(numStr) {
+  if (numStr === "") return "0";
+  const [intPart, decPart] = numStr.split(".");
+  const negative = intPart.startsWith("-");
+  const digits = negative ? intPart.slice(1) : intPart;
+  const withCommas = digits.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+  let out = (negative ? "-" : "") + withCommas;
+  if (decPart !== undefined) out += "." + decPart;
+  return out;
+}
+
+function updateDisplay() {
+  resultEl.textContent = formatNumber(current);
+}
+
+function updateHistory(text) {
+  historyEl.textContent = text || "\u00A0";
+}
+
+function inputNumber(num) {
+  if (justEvaluated) {
+    current = num;
+    justEvaluated = false;
+    updateHistory("");
+  } else if (current === "0") {
+    current = num;
+  } else {
+    if (current.replace("-", "").replace(".", "").length >= 12) return;
+    current += num;
+  }
+  updateDisplay();
+}
+
+function inputDecimal() {
+  if (justEvaluated) {
+    current = "0.";
+    justEvaluated = false;
+    updateHistory("");
+  } else if (!current.includes(".")) {
+    current += ".";
+  }
+  updateDisplay();
+}
+
+function clearAll() {
+  current = "0";
+  previous = null;
+  operator = null;
+  justEvaluated = false;
+  updateHistory("");
+  updateDisplay();
+}
+
+function negate() {
+  if (current === "0" || current === "Error") return;
+  current = current.startsWith("-") ? current.slice(1) : "-" + current;
+  updateDisplay();
+}
+
+function percent() {
+  if (current === "Error") return;
+  const val = parseFloat(current) / 100;
+  current = String(val);
+  updateDisplay();
+}
+
+function compute(a, b, op) {
+  const x = parseFloat(a);
+  const y = parseFloat(b);
+  switch (op) {
+    case "+":
+      return x + y;
+    case "−":
+      return x - y;
+    case "×":
+      return x * y;
+    case "÷":
+      return y === 0 ? NaN : x / y;
+    default:
+      return y;
+  }
+}
+
+function chooseOperator(op) {
+  // Mulai bersih jika sebelumnya terjadi error
+  if (current === "Error") {
+    previous = null;
+    operator = null;
+    current = "0";
+    justEvaluated = false;
+  }
+
+  if (operator && previous !== null && !justEvaluated) {
+    const result = compute(previous, current, operator);
+    current = String(result);
+    updateDisplay();
+    previous = current;
+  } else {
+    previous = current;
+  }
+  operator = op;
+  justEvaluated = false;
+  current = "0";
+  updateHistory(`${formatNumber(previous)} ${operator}`);
+}
+
+function equals() {
+  if (operator === null || previous === null) return;
+  const result = compute(previous, current, operator);
+  const resultStr = Number.isFinite(result) ? trimResult(result) : "Error";
+  updateHistory(
+    `${formatNumber(previous)} ${operator} ${formatNumber(current)}`,
+  );
+  current = resultStr;
+  previous = null;
+  operator = null;
+  justEvaluated = true;
+  updateDisplay();
+}
+
+function trimResult(num) {
+  if (!Number.isFinite(num)) return "Error";
+  if (num === 0) return "0";
+  let str = num.toFixed(8).replace(/0+$/, "").replace(/\.$/, "");
+  if (str.replace("-", "").replace(".", "").length > 12) {
+    str = num.toPrecision(10);
+    str = parseFloat(str).toString();
+  }
+  return str;
+}
+
+buttons.forEach((btn) => {
+  btn.addEventListener("click", () => {
+    const num = btn.dataset.num;
+    const op = btn.dataset.op;
+    const action = btn.dataset.action;
+
+    if (num !== undefined) {
+      inputNumber(num);
+    } else if (op !== undefined) {
+      chooseOperator(op);
+    } else if (action === "clear") {
+      clearAll();
+    } else if (action === "negate") {
+      negate();
+    } else if (action === "percent") {
+      percent();
+    } else if (action === "decimal") {
+      inputDecimal();
+    } else if (action === "equals") {
+      equals();
+    }
+  });
+});
+
+/* Theme toggle */
+themeToggle.addEventListener("click", () => {
+  const isDark = body.dataset.theme === "dark";
+  const newTheme = isDark ? "light" : "dark";
+  body.dataset.theme = newTheme;
+  applyThemeMeta(newTheme);
+  syncWavesTheme(newTheme);
+});
+
+/* Keyboard sync: sorot tombol yang bersesuaian saat key ditekan */
+function flashButton(selector) {
+  const btn = document.querySelector(selector);
+  if (!btn) return;
+  btn.classList.add("btn-pressed");
+  clearTimeout(btn._flashTimer);
+  btn._flashTimer = setTimeout(() => btn.classList.remove("btn-pressed"), 150);
+}
+
+/* Keyboard support */
+document.addEventListener("keydown", (e) => {
+  if (e.key >= "0" && e.key <= "9") {
+    inputNumber(e.key);
+    flashButton(`[data-num="${e.key}"]`);
+  } else if (e.key === ".") {
+    inputDecimal();
+    flashButton('[data-action="decimal"]');
+  } else if (e.key === "+") {
+    chooseOperator("+");
+    flashButton('[data-op="+"]');
+  } else if (e.key === "-") {
+    chooseOperator("−");
+    flashButton('[data-op="−"]');
+  } else if (e.key === "*") {
+    chooseOperator("×");
+    flashButton('[data-op="×"]');
+  } else if (e.key === "/") {
+    e.preventDefault();
+    chooseOperator("÷");
+    flashButton('[data-op="÷"]');
+  } else if (e.key === "Enter" || e.key === "=") {
+    e.preventDefault();
+    equals();
+    flashButton('[data-action="equals"]');
+  } else if (e.key === "Escape") {
+    clearAll();
+    flashButton('[data-action="clear"]');
+  } else if (e.key === "%") {
+    percent();
+    flashButton('[data-action="percent"]');
+  } else if (e.key === "Backspace") {
+    if (justEvaluated) {
+      clearAll();
+    } else {
+      current = current.length > 1 ? current.slice(0, -1) : "0";
+      if (current === "-" || current === "-0") current = "0";
+      updateDisplay();
+    }
+  } else if (
+    e.key === " " ||
+    e.key.startsWith("Arrow") ||
+    e.key === "PageUp" || e.key === "PageDown" ||
+    e.key === "Home" || e.key === "End"
+  ) {
+    /* Mobile/hardware: blokir tombol yang bisa menggulir/melompat agar tidak
+       mengganggu kalkulator. Virtual keyboard tidak akan muncul karena halaman
+       tidak memiliki <input>/textarea sama sekali. */
+    e.preventDefault();
+  }
+});
+
+applyThemeMeta(body.dataset.theme);
+updateDisplay();

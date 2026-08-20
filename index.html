@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="color-scheme" content="dark light">
+  <meta name="description" content="Kalkulator vanilla HTML/CSS/JS dengan gaya claymorphism + glassmorphism di atas background gradient waves (WebGL2).">
+  <meta name="theme-color" content="#17140f">
+
+  <meta property="og:title" content="Calculator">
+  <meta property="og:description" content="Kalkulator minimalis dengan animated gradient waves background.">
+  <meta property="og:type" content="website">
+
+  <title>Calculator</title>
+  <link rel="stylesheet" href="assets/css/style.css">
+  <link rel="shortcut icon" href="assets/favicon/favicon.ico" type="image/x-icon">
+</head>
+
+<body data-theme="dark">
+
+  <div class="waves-bg" id="wavesBg"></div>
+
+  <div class="calculator" id="calculator">
+
+    <div class="calc-top">
+      <button class="theme-btn" id="themeToggle" aria-label="Toggle dark and light mode">
+        <!-- Sun: ditampilkan saat dark, klik untuk beralih ke light -->
+        <svg class="icon-sun" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+          <circle cx="12" cy="12" r="4"></circle>
+          <path d="M12 2v2"></path>
+          <path d="M12 20v2"></path>
+          <path d="m4.93 4.93 1.41 1.41"></path>
+          <path d="m17.66 17.66 1.41 1.41"></path>
+          <path d="M2 12h2"></path>
+          <path d="M20 12h2"></path>
+          <path d="m6.34 17.66-1.41 1.41"></path>
+          <path d="m19.07 4.93-1.41 1.41"></path>
+        </svg>
+        <!-- Moon: ditampilkan saat light, klik untuk beralih ke dark -->
+        <svg class="icon-moon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+          <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"></path>
+        </svg>
+      </button>
+    </div>
+
+    <div class="calc-display">
+      <div class="history" id="history" aria-live="polite">&nbsp;</div>
+      <div class="result" id="result" aria-live="polite">0</div>
+    </div>
+
+    <div class="calc-grid">
+      <button class="btn btn-func" data-action="clear">C</button>
+      <button class="btn btn-func" data-action="negate">+/-</button>
+      <button class="btn btn-func" data-action="percent">%</button>
+      <button class="btn btn-op" data-op="÷">÷</button>
+
+      <button class="btn btn-num" data-num="7">7</button>
+      <button class="btn btn-num" data-num="8">8</button>
+      <button class="btn btn-num" data-num="9">9</button>
+      <button class="btn btn-op" data-op="×">×</button>
+
+      <button class="btn btn-num" data-num="4">4</button>
+      <button class="btn btn-num" data-num="5">5</button>
+      <button class="btn btn-num" data-num="6">6</button>
+      <button class="btn btn-op" data-op="−">−</button>
+
+      <button class="btn btn-num" data-num="1">1</button>
+      <button class="btn btn-num" data-num="2">2</button>
+      <button class="btn btn-num" data-num="3">3</button>
+      <button class="btn btn-op" data-op="+">+</button>
+
+      <button class="btn btn-num btn-zero" data-num="0">0</button>
+      <button class="btn btn-num" data-action="decimal">.</button>
+      <button class="btn btn-op btn-equals" data-action="equals">=</button>
+    </div>
+
+  </div>
+
+  <script src="assets/js/gradient-waves.js"></script>
+  <script src="assets/js/script.js"></script>
+</body>
+
+</html>

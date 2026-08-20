@@ -1,0 +1,118 @@
+/* ============================================================
+   variable.css — Design tokens (CSS custom properties)
+   Sumber nilai: docs/DESIGN.md §3
+   ============================================================ */
+
+body {
+  --font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+}
+
+/* ===== Mode Dark ===== */
+
+body[data-theme="dark"] {
+  /* Background halaman */
+  --bg: #17140f;
+
+  /* Kartu kalkulator (glass) */
+  --card-bg: linear-gradient(160deg, rgba(40, 37, 32, 0.55), rgba(24, 21, 18, 0.55) 65%);
+  --card-border: 1px solid rgba(255, 255, 255, 0.08);
+  --card-shadow:
+    0 30px 70px -20px rgba(0, 0, 0, 0.65),
+    inset 0 1px 0 rgba(255, 255, 255, 0.06),
+    inset 0 0 40px rgba(255, 255, 255, 0.02);
+
+  /* Tombol tema */
+  --theme-bg: rgba(255, 255, 255, 0.07);
+  --theme-color: rgba(255, 255, 255, 0.7);
+  --theme-shadow:
+    3px 3px 8px rgba(0, 0, 0, 0.3),
+    -2px -2px 6px rgba(255, 255, 255, 0.03),
+    inset 0 1px 1px rgba(255, 255, 255, 0.06);
+
+  /* Display */
+  --history-color: rgba(255, 255, 255, 0.32);
+  --result-color: #ffffff;
+  --result-shadow: 0 2px 12px rgba(0, 0, 0, 0.35);
+
+  /* Tombol angka & fungsi (clay) */
+  --btn-num-bg: linear-gradient(160deg, #454540, #333330);
+  --btn-num-bg-active: linear-gradient(160deg, #333330, #454540);
+  --btn-num-color: #ffffff;
+  --btn-num-shadow:
+    6px 6px 12px rgba(0, 0, 0, 0.35),
+    -4px -4px 10px rgba(255, 255, 255, 0.04),
+    inset 0 1px 1px rgba(255, 255, 255, 0.06);
+  --btn-num-shadow-active:
+    inset 3px 3px 8px rgba(0, 0, 0, 0.4),
+    inset -2px -2px 6px rgba(255, 255, 255, 0.03);
+
+  /* Tombol operator (orange) */
+  --btn-op-bg: linear-gradient(160deg, #ffb75c, #ec9426);
+  --btn-op-bg-active: linear-gradient(160deg, #ec9426, #ffb75c);
+  --btn-op-color: #ffffff;
+  --btn-op-shadow:
+    6px 6px 14px rgba(180, 100, 10, 0.35),
+    -4px -4px 10px rgba(255, 200, 130, 0.35),
+    inset 0 1px 1px rgba(255, 255, 255, 0.35);
+  --btn-op-shadow-active:
+    inset 3px 3px 8px rgba(150, 80, 5, 0.4),
+    inset -2px -2px 6px rgba(255, 210, 150, 0.3);
+
+  /* Ring fokus */
+  --focus-ring: rgba(255, 183, 92, 0.9);
+}
+
+/* ===== Mode Light ===== */
+
+body[data-theme="light"] {
+  /* Background halaman */
+  --bg: #efe9dd;
+
+  /* Kartu kalkulator (glass) */
+  --card-bg: linear-gradient(160deg, rgba(255, 255, 255, 0.45), rgba(255, 255, 255, 0.25) 65%);
+  --card-border: 1px solid rgba(255, 255, 255, 0.6);
+  --card-shadow:
+    0 30px 70px -20px rgba(0, 0, 0, 0.22),
+    inset 0 1px 0 rgba(255, 255, 255, 0.8),
+    inset 0 0 40px rgba(255, 255, 255, 0.15);
+
+  /* Tombol tema */
+  --theme-bg: rgba(255, 255, 255, 0.5);
+  --theme-color: rgba(60, 55, 40, 0.6);
+  --theme-shadow:
+    3px 3px 8px rgba(160, 145, 110, 0.22),
+    -2px -2px 6px rgba(255, 255, 255, 0.7),
+    inset 0 1px 1px rgba(255, 255, 255, 0.6);
+
+  /* Display */
+  --history-color: rgba(0, 0, 0, 0.32);
+  --result-color: #211e17;
+  --result-shadow: 0 2px 12px rgba(255, 255, 255, 0.4);
+
+  /* Tombol angka & fungsi (clay) */
+  --btn-num-bg: linear-gradient(160deg, #ffffff, #e9e7e0);
+  --btn-num-bg-active: linear-gradient(160deg, #e9e7e0, #ffffff);
+  --btn-num-color: #2a271f;
+  --btn-num-shadow:
+    6px 6px 14px rgba(160, 145, 110, 0.28),
+    -5px -5px 12px rgba(255, 255, 255, 0.9),
+    inset 0 1px 1px rgba(255, 255, 255, 0.6);
+  --btn-num-shadow-active:
+    inset 3px 3px 8px rgba(160, 145, 110, 0.3),
+    inset -2px -2px 6px rgba(255, 255, 255, 0.7);
+
+  /* Tombol operator (orange — konsisten dengan dark) */
+  --btn-op-bg: linear-gradient(160deg, #ffb75c, #ec9426);
+  --btn-op-bg-active: linear-gradient(160deg, #ec9426, #ffb75c);
+  --btn-op-color: #ffffff;
+  --btn-op-shadow:
+    6px 6px 14px rgba(180, 100, 10, 0.35),
+    -4px -4px 10px rgba(255, 200, 130, 0.35),
+    inset 0 1px 1px rgba(255, 255, 255, 0.35);
+  --btn-op-shadow-active:
+    inset 3px 3px 8px rgba(150, 80, 5, 0.4),
+    inset -2px -2px 6px rgba(255, 210, 150, 0.3);
+
+  /* Ring fokus */
+  --focus-ring: rgba(236, 148, 38, 0.9);
+}

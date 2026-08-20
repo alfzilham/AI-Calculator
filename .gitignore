@@ -1,0 +1,11 @@
+# Graphify
+graphify-out/
+
+# Logs
+logs/
+*.log
+
+# Environment
+.env
+.env.*
+!.env.example

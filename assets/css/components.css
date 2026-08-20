@@ -1,0 +1,195 @@
+/* ============================================================
+   components.css — Kartu kalkulator, display, tombol
+   Semua nilai warna diambil dari variable.css (design tokens)
+   ============================================================ */
+
+/* ===== Calculator Card (Glassmorphism) ===== */
+
+.calculator {
+  width: 100%;
+  max-width: 340px;
+  border-radius: 44px;
+  padding: 22px 18px 26px;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  position: relative;
+  z-index: 1;
+  transition: background 0.4s ease, box-shadow 0.4s ease, border 0.4s ease;
+  -webkit-backdrop-filter: blur(28px) saturate(160%);
+  backdrop-filter: blur(28px) saturate(160%);
+}
+
+body[data-theme="dark"] .calculator,
+body[data-theme="light"] .calculator {
+  background: var(--card-bg);
+  border: var(--card-border);
+  box-shadow: var(--card-shadow);
+}
+
+/* ===== Top row / theme toggle ===== */
+
+.calc-top {
+  display: flex;
+  justify-content: flex-start;
+}
+
+.theme-btn {
+  width: 44px;
+  height: 44px;
+  border-radius: 16px;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background 0.4s ease, color 0.4s ease, transform 0.15s ease, box-shadow 0.15s ease;
+  background: var(--theme-bg);
+  color: var(--theme-color);
+  box-shadow: var(--theme-shadow);
+}
+
+.theme-btn:active {
+  transform: scale(0.92);
+}
+
+.theme-btn svg {
+  width: 20px;
+  height: 20px;
+  stroke: currentColor;
+  fill: none;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+/* Ikon tema: dark → tampilkan sun (klik utk beralih ke light) */
+
+body[data-theme="dark"] .icon-moon {
+  display: none;
+}
+
+body[data-theme="light"] .icon-sun {
+  display: none;
+}
+
+/* ===== Display ===== */
+
+.calc-display {
+  text-align: right;
+  padding: 4px 8px 8px;
+  min-height: 88px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  gap: 6px;
+  user-select: none;
+}
+
+.history {
+  font-size: 15px;
+  font-weight: 400;
+  color: var(--history-color);
+  transition: color 0.4s ease;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.result {
+  font-size: 48px;
+  font-weight: 600;
+  line-height: 1.1;
+  letter-spacing: -0.5px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  color: var(--result-color);
+  text-shadow: var(--result-shadow);
+  transition: color 0.4s ease;
+}
+
+/* ===== Button grid ===== */
+
+.calc-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+}
+
+.btn {
+  border: none;
+  border-radius: 20px;
+  font-size: 24px;
+  font-weight: 500;
+  padding: 20px 0;
+  cursor: pointer;
+  font-family: inherit;
+  user-select: none;
+  touch-action: manipulation;
+  transition: background 0.15s ease, transform 0.1s ease, filter 0.15s ease, box-shadow 0.15s ease;
+}
+
+.btn:active {
+  transform: scale(0.94);
+}
+
+.btn-zero {
+  grid-column: span 2;
+  text-align: left;
+  padding-left: 28px;
+}
+
+/* ===== Number / function buttons (Claymorphism) ===== */
+
+.btn-num,
+.btn-func {
+  background: var(--btn-num-bg);
+  color: var(--btn-num-color);
+  box-shadow: var(--btn-num-shadow);
+}
+
+.btn-num:active,
+.btn-func:active {
+  background: var(--btn-num-bg-active);
+  box-shadow: var(--btn-num-shadow-active);
+}
+
+/* ===== Operator buttons (Claymorphism orange) ===== */
+
+.btn-op {
+  background: var(--btn-op-bg);
+  color: var(--btn-op-color);
+  font-weight: 600;
+  box-shadow: var(--btn-op-shadow);
+}
+
+.btn-op:active {
+  background: var(--btn-op-bg-active);
+  box-shadow: var(--btn-op-shadow-active);
+}
+
+/* ===== Keyboard sync (sorot tombol sesuai key yang ditekan) ===== */
+
+.btn.btn-pressed {
+  transform: scale(0.94);
+}
+
+.btn-num.btn-pressed,
+.btn-func.btn-pressed {
+  background: var(--btn-num-bg-active);
+  box-shadow: var(--btn-num-shadow-active);
+}
+
+.btn-op.btn-pressed {
+  background: var(--btn-op-bg-active);
+  box-shadow: var(--btn-op-shadow-active);
+}
+
+/* ===== Focus visibility (accessibility) ===== */
+
+.btn:focus-visible,
+.theme-btn:focus-visible {
+  outline: 2px solid var(--focus-ring);
+  outline-offset: 2px;
+}

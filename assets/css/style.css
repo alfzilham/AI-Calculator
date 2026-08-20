@@ -1,0 +1,22 @@
+/* ============================================================
+   style.css — Entry point
+   Urutan import penting: tokens → base → komponen → responsif
+   ============================================================ */
+
+@import url("variable.css");
+@import url("global.css");
+@import url("components.css");
+@import url("responsive.css");
+
+/* ===== Reduced motion (accessibility) ===== */
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    transition: none !important;
+    animation: none !important;
+  }
+
+  .waves-bg {
+    display: none;
+  }
+}

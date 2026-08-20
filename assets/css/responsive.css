@@ -1,0 +1,29 @@
+/* ============================================================
+   responsive.css — Media queries (mobile-first)
+   ============================================================ */
+
+/* Base style ditulis untuk layar sempit terlebih dahulu. */
+
+@media (max-width: 360px) {
+  .calculator {
+    max-width: 100%;
+    border-radius: 36px;
+    padding: 18px 14px 22px;
+  }
+
+  .result {
+    font-size: 40px;
+  }
+
+  .btn {
+    font-size: 21px;
+    padding: 17px 0;
+    border-radius: 18px;
+  }
+}
+
+@media (min-width: 480px) {
+  .calculator {
+    max-width: 380px;
+  }
+}
