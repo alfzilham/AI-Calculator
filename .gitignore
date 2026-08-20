@@ -1,6 +1,9 @@
 # Graphify
 graphify-out/
 
+# Opencode (local project config & rules)
+.opencode/
+
 # Logs
 logs/
 *.log
