@@ -202,7 +202,8 @@ Manual test checklist. Each row maps to the requirements above.
 | 22 | Enter `123`, press `⌫`                                            | Display `12`                                             | FR-32     |
 | 23 | Enter `5`, `+`, `7`, press `CE`, then `3`, `=`                    | Result `8` (CE preserved `5 +`)                           | FR-33     |
 | 24 | Enter `12`, press `×²`                                            | Display `144`                                            | FR-34     |
-| 25 | Enter `16`, press `√`; then `9`, `+/-`, `√`                       | Display `4`; then `Error`                                | FR-35     |
+| 25 | Enter `16`, press `√`; then `9`, `+/-`, `√`       | Display `4`; then `Error`                                | FR-35     |
+| 26 | Inspect the button grid                            | `0` is normal width, `+/-` sits left of `0`, `=` spans two rows, no empty cells | — |
 
 ---
 

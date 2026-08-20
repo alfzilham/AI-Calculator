@@ -104,7 +104,19 @@ AICalculator/
 | Buttons (general)          | `20px` (→ `18px` small mobile)  | `20px 0` vertical                |
 | Theme button               | `16px`                          | `44×44px` fixed                 |
 | Button grid                | —                               | `gap: 10px`, 4 columns × 6 rows |
-| `0` button (span 2 cols)   | same as general                 | `padding-left: 28px`, left-aligned |
+| `0` button                 | same as general                 | normal width (no column span)   |
+| `=` button                 | same as general                 | `grid-row: span 2` (tall equals) |
+
+Current grid layout (4×6, no empty cells):
+
+```
+| CE  | C   | ⌫   | ÷   |
+| ×²  | √   | %   | ×   |
+| 7   | 8   | 9   | −   |
+| 4   | 5   | 6   | +   |
+| 1   | 2   | 3   | [= spans 2 rows] |
+| +/- | 0   | .   |     |
+```
 
 ---
 

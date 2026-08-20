@@ -86,6 +86,12 @@ Concise decision log. See `docs/ARCHITECTURE.md` for the resulting structure and
 - **Decision:** Add backspace (`⌫`), clear entry (`CE`), square (`×²`), and square root (`√`) buttons, and re-layout the grid to 4 columns × 6 rows (24 cells) with `0` still spanning two columns.
 - **Consequence:** Mobile deletion and quick operations are now on-screen; the extra row slightly increases the card height. `deleteLast()` reuses the same logic as the existing Backspace key, so keyboard and touch stay in sync.
 
+### ADR-009 — Grid layout refinement and inline backspace icon
+
+- **Context:** The wide `0` button wasted horizontal space, `+/-` sat far from the digits, and the backspace used a text glyph (`⌫`).
+- **Decision:** Remove the `0` column span so `+/-` sits immediately left of `0`; make `=` span two rows (`.btn-equals { grid-row: span 2 }`) for an iOS-style tall equals; replace the `⌫` glyph with an inline SVG icon (Lucide `delete` path), consistent with the existing inline theme icons.
+- **Consequence:** A denser, more conventional layout; backspace stays professional-looking while preserving the zero-dependency, offline-friendly principle.
+
 ---
 
 ## 4. Conventions
