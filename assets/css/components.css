@@ -140,8 +140,10 @@ body[data-theme="light"] .icon-sun {
 
 /* Ikon backspace (SVG inline) */
 .btn[data-action="backspace"] svg {
-  width: 26px;
-  height: 26px;
+  display: block;
+  width: 1em;
+  height: 1em;
+  flex-shrink: 0;
   stroke: currentColor;
   fill: none;
   stroke-width: 2;
