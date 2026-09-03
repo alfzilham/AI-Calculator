@@ -22,12 +22,29 @@
   <!-- Background layer -->
   <div class="waves-bg" id="wavesBg"></div>
 
+  <!-- Mobile overlay -->
+  <div class="sidebar-overlay" id="sidebarOverlay" aria-hidden="true"></div>
+
   <!-- Sidebar: glassmorphism navigation (desktop: collapsible, mobile: drawer overlay) -->
-  <!-- TODO: Sidebar implementation -->
+  <aside class="sidebar" id="sidebar" aria-label="Main navigation">
+    <div class="sidebar-inner">
+      <!-- Brand + search + nav content area -->
+      <div class="sidebar-content">
+        <!-- Brand, search, and navigation will be added here -->
+      </div>
+      <!-- User profile (sticky bottom) -->
+      <div class="sidebar-footer">
+        <!-- User profile will be added here -->
+      </div>
+    </div>
+  </aside>
 
   <div class="calculator" id="calculator">
 
     <div class="calc-top">
+      <button class="sidebar-toggle" id="sidebarToggle" aria-label="Open sidebar" aria-expanded="false" aria-controls="sidebar">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><line x1="3" x2="21" y1="6" y2="6"></line><line x1="3" x2="21" y1="12" y2="12"></line><line x1="3" x2="21" y1="18" y2="18"></line></svg>
+      </button>
       <button class="theme-btn" id="themeToggle" aria-label="Toggle dark and light mode">
         <!-- Sun: ditampilkan saat dark, klik untuk beralih ke light -->
         <svg class="icon-sun" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
