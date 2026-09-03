@@ -493,3 +493,9 @@ body[data-theme="light"] .sidebar-search-input:focus {
   background: rgba(255, 183, 92, 0.15);
   color: var(--sidebar-active-color);
 }
+
+.sidebar-nav-divider {
+  height: 1px;
+  background: var(--sidebar-hover-bg);
+  margin: 8px 12px;
+}
