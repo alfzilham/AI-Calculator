@@ -7,6 +7,7 @@ A **vanilla HTML/CSS/JS** calculator with no framework and no build tools. Inspi
 - Basic operations: `+`, `−`, `×`, `÷`, percent (`%`), negation (`+/-`), decimal, and clear (`C`)
 - Convenience buttons: backspace (`⌫`), clear entry (`CE`), square (`×²`), and square root (`√`)
 - Two themes: **dark** & **light**, toggled via the theme icon in the top-left corner
+- **Sidebar navigation** with glassmorphism styling, user profile dropdown, and mobile drawer overlay
 - **Gradient waves** background reactive to the cursor (parallax) — automatically stops when the tab is inactive or the canvas is off-screen
 - Number formatting with thousands separators, result precision capped to avoid floating-point artifacts
 - Result font auto-scales so long numbers (up to 12 digits) always fit without truncation
@@ -26,12 +27,12 @@ AICalculator/
 │   ├── css/
 │   │   ├── variable.css          # Design tokens (CSS custom properties)
 │   │   ├── global.css            # Reset + base layout + waves
-│   │   ├── components.css        # Card, display, buttons
+│   │   ├── components.css        # Card, display, buttons, sidebar, profile
 │   │   ├── responsive.css        # Media queries
 │   │   └── style.css             # Entry point (@imports all modules)
 │   ├── js/
 │   │   ├── gradient-waves.js     # Standalone WebGL2 module (IIFE → window.GradientWaves)
-│   │   └── script.js             # Calculator logic + theme control + waves init
+│   │   └── script.js             # Calculator logic + theme control + waves init + sidebar
 │   └── favicon/                  # Site icon
 ├── docs/
 │   ├── ARCHITECTURE.md           # Technical architecture
@@ -50,7 +51,7 @@ AICalculator/
 | `.`          | Decimal             |
 | `+ - * /`    | Operator            |
 | `Enter` / `=` | Evaluate result     |
-| `Escape`     | Clear all           |
+| `Escape`     | Clear all / close sidebar |
 | `%`          | Percent             |
 | `Backspace`  | Delete last digit   |
 
@@ -59,7 +60,8 @@ AICalculator/
 - **WebGL2 required** for the animated background; if unsupported, a solid background is shown and the calculator remains fully functional.
 - **`backdrop-filter`**: without support, the card renders as a semi-transparent color without blur (safe degradation).
 - **`prefers-reduced-motion`** is respected: wave animation is disabled and CSS transitions are removed.
-- No external dependencies (theme icons inlined as SVG).
+- No external dependencies (theme icons and sidebar icons inlined as SVG).
+- **Sidebar** is collapsible on desktop and becomes a drawer overlay on mobile. Escape key and backdrop click close the sidebar.
 
 ## Development Rules
 

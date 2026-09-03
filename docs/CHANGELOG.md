@@ -9,7 +9,31 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
-- Backspace button (`⌫`) to delete the last digit on touch devices (previously keyboard-only).
+- Sidebar navigation with glassmorphism styling, collapsible on desktop and drawer overlay on mobile.
+- Brand section with "AI Calculator" name and icon in the sidebar.
+- Search bar with inline SVG icon in the sidebar.
+- Navigation menu: Home (active), AI Chatbot (demo), Projects (demo), Settings (demo) — all with inline SVG icons and semantic `<button>` elements.
+- Sticky user profile section at the bottom of the sidebar with avatar, name ("Alfiz"), plan status ("Free Plan"), and dropdown menu (Settings, Upgrade plan, Log out).
+- Sidebar toggle button (hamburger ↔ X) in the calculator top bar with aria-label and aria-expanded support.
+- Mobile overlay backdrop behind sidebar; click backdrop or press Escape to close.
+- Sidebar toggle behavior: `toggleSidebar()`, `openSidebar()`, `closeSidebar()`, `toggleProfileMenu()` functions.
+- Keyboard support: Escape key closes profile menu first, then sidebar.
+- Nav button active state with left accent indicator bar.
+- Demo badges on AI Chatbot, Projects, and Settings menu items.
+- Visual section divider between Home and demo navigation items.
+- New CSS design tokens for sidebar: `--sidebar-bg`, `--sidebar-border`, `--sidebar-shadow`, `--sidebar-text`, `--sidebar-text-dim`, `--sidebar-hover-bg`, `--sidebar-active-bg`, `--sidebar-active-color`, `--sidebar-profile-bg`, `--sidebar-profile-border`.
+- Hamburger icon animates to X when sidebar is open (CSS transform on SVG lines).
+
+### Changed
+
+- Backspace button icon alignment fixed: button now uses `display: flex; align-items: center; justify-content: center` to perfectly center the SVG icon horizontally and vertically.
+- Calculator top bar (`calc-top`) now includes a sidebar toggle button alongside the theme toggle.
+
+### Fixed
+
+- Backspace SVG icon is now precisely centered in the button across all states (desktop, mobile, active, focus-visible).
+
+Backspace button (`⌫`) to delete the last digit on touch devices (previously keyboard-only).
 - Clear Entry button (`CE`) that clears only the current entry while keeping the pending operator and history.
 - Square (`×²`) and square root (`√`) buttons as unary operations.
 

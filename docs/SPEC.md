@@ -95,6 +95,26 @@ The app is a single-page calculator supporting the four basic arithmetic operati
 | FR-34 | `×²` squares the current value; ignored in the `Error` state; produces a fresh result.               | `square()`     |
 | FR-35 | `√` computes the square root; a negative value yields `Error`; produces a fresh result.              | `sqrt()`       |
 
+### 2.9 Sidebar Navigation
+
+| ID    | Requirement                                                                                          | Implementation                 |
+| ----- | ---------------------------------------------------------------------------------------------------- | ------------------------------ |
+| FR-36 | Sidebar displays brand "AI Calculator" with icon at the top.                                         | `index.html` sidebar-brand     |
+| FR-37 | Search bar with placeholder "Search" and inline SVG search icon is displayed below brand.            | `index.html` sidebar-search    |
+| FR-38 | Navigation menu includes Home (active), AI Chatbot (demo), Projects (demo), Settings (demo).         | `index.html` sidebar-nav       |
+| FR-39 | Home nav item has `aria-current="page"` and visual active state (background + left indicator bar).   | `index.html` + `components.css`|
+| FR-40 | Demo nav items (Chatbot, Projects, Settings) display a "Demo" badge.                                | `index.html` sidebar-nav-badge |
+| FR-41 | Sidebar toggle button (hamburger) is in the calculator top bar with `aria-label` and `aria-expanded`.| `index.html` sidebar-toggle    |
+| FR-42 | Sidebar opens/closes with smooth CSS transform transition.                                           | `openSidebar()`/`closeSidebar()`|
+| FR-43 | On desktop (`≥769px`), sidebar slides from left as a side panel; calculator shifts right.            | `responsive.css`               |
+| FR-44 | On mobile (`≤768px`), sidebar becomes a full-height overlay drawer with semi-transparent backdrop.    | `responsive.css`               |
+| FR-45 | Backdrop click closes the sidebar.                                                                   | `sidebarOverlayEl` click handler|
+| FR-46 | Escape key closes profile menu first, then sidebar.                                                  | `keydown` handler               |
+| FR-47 | User profile section is sticky at the bottom of the sidebar with avatar, name, plan, and chevron.    | `sidebar-profile`              |
+| FR-48 | Profile dropdown shows Settings, Upgrade plan, and Log out menu items on click.                      | `toggleProfileMenu()`          |
+| FR-49 | Sidebar is compatible with dark and light themes via CSS custom properties.                           | `variable.css` sidebar tokens  |
+| FR-50 | Sidebar uses glassmorphism: semi-transparent background, backdrop blur, border, shadow.              | `components.css`               |
+
 ---
 
 ## 3. Non-Functional Requirements

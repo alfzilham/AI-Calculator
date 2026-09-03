@@ -86,6 +86,19 @@ AICalculator/
 | Dark  | `#1a1108` (near-black brown)     | `#7a3d0f` (dark/burnt orange)  | `#ffb347` (bright orange) |
 | Light | `#f4e3c8` (pale cream)           | `#f2a43a` (medium orange)      | `#ffe0a3` (pastel orange) |
 
+### 3.4 Sidebar Colors
+
+| Token                    | Dark Mode                                              | Light Mode                                             | Usage                          |
+| ------------------------ | ------------------------------------------------------ | ------------------------------------------------------ | ------------------------------ |
+| Sidebar background       | `rgba(40,37,32,0.75)` → `rgba(24,21,18,0.85)`         | `rgba(255,255,255,0.75)` → `rgba(255,255,255,0.85)`   | Glass fill, gradient           |
+| Sidebar border           | `rgba(255,255,255,0.08)`                              | `rgba(255,255,255,0.6)`                              | Glass edge                     |
+| Sidebar text             | `rgba(255,255,255,0.72)`                              | `rgba(50,45,35,0.78)`                                | Primary text                   |
+| Sidebar text dim         | `rgba(255,255,255,0.4)`                               | `rgba(50,45,35,0.4)`                                 | Secondary/placeholder text     |
+| Sidebar hover background | `rgba(255,255,255,0.06)`                              | `rgba(0,0,0,0.04)`                                   | Hover state on nav items       |
+| Sidebar active background| `rgba(255,183,92,0.12)`                               | `rgba(236,148,38,0.1)`                               | Active nav item background     |
+| Sidebar active color     | `#ffb75c`                                              | `#ec9426`                                              | Active nav item text + icon    |
+| Sidebar profile bg       | `rgba(255,255,255,0.05)`                              | `rgba(0,0,0,0.03)`                                   | Profile card background        |
+
 ### 3.4 Typography
 
 | Element                | Size                               | Weight | Notes                                                                                      |
@@ -122,10 +135,15 @@ Current grid layout (4×6, no empty cells):
 
 ## 4. Style Implementation Details
 
-### 4.1 Glassmorphism — Calculator Card
+### 4.1 Glassmorphism — Calculator Card & Sidebar
 
 ```css
 .calculator {
+  -webkit-backdrop-filter: blur(28px) saturate(160%);
+  backdrop-filter: blur(28px) saturate(160%);
+}
+
+.sidebar-inner {
   -webkit-backdrop-filter: blur(28px) saturate(160%);
   backdrop-filter: blur(28px) saturate(160%);
 }

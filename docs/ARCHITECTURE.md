@@ -8,9 +8,9 @@ Architecture documentation for the AICalculator — a vanilla HTML/CSS/JS calcul
 
 The application is a **single static page** composed of three cooperating layers:
 
-1. **HTML** (`index.html`) — declarative structure and metadata.
+1. **HTML** (`index.html`) — declarative structure and metadata, including the sidebar.
 2. **CSS** — a modular pipeline of design tokens → base → components → responsive rules.
-3. **JavaScript** — two independent modules: the calculator logic + theme controller (`script.js`) and the self-contained WebGL2 background (`gradient-waves.js`).
+3. **JavaScript** — two independent modules: the calculator logic + theme controller + sidebar (`script.js`) and the self-contained WebGL2 background (`gradient-waves.js`).
 
 There is no server, no bundler, and no external CDN. The page loads assets via relative paths and works by simply opening `index.html`.
 
@@ -91,10 +91,10 @@ flowchart TB
 
 | Module           | Responsibility                                                                                  |
 | ---------------- | ----------------------------------------------------------------------------------------------- |
-| `variable.css`   | All design tokens as CSS custom properties scoped under `body[data-theme="dark"]` / `body[data-theme="light"]`. |
+| `variable.css`   | All design tokens as CSS custom properties scoped under `body[data-theme="dark"]` / `body[data-theme="light"]`, including sidebar tokens. |
 | `global.css`     | Universal reset, base `body` layout (centered flex, `overflow: hidden`), and the `.waves-bg` fixed full-screen layer. |
-| `components.css` | Glass card (`.calculator`), display (`.result`/`.history`), theme button (`.theme-btn`), button grid (`.btn*`), focus-visible styles, and keyboard-sync `.btn-pressed` state. |
-| `responsive.css` | Mobile-first breakpoints (`≤360px` shrink, `≥480px` widen).                                     |
+| `components.css` | Glass card (`.calculator`), display (`.result`/`.history`), theme button (`.theme-btn`), sidebar toggle (`.sidebar-toggle`), sidebar (`.sidebar`), button grid (`.btn*`), focus-visible styles, and keyboard-sync `.btn-pressed` state. |
+| `responsive.css` | Mobile-first breakpoints (`≤360px` shrink, `≥480px` widen), sidebar drawer behavior (`≤768px` mobile overlay, `≥769px` desktop side panel). |
 
 **Theming contract:** the `data-theme` attribute on `<body>` is the single source of truth for the theme. Every color token is defined once per theme in `variable.css`; components consume them via `var(--token)`.
 
@@ -157,6 +157,11 @@ flowchart LR
 | `syncWavesTheme`    | Pushes the theme's wave colors into the WebGL instance via `setColors`.   |
 | `flashButton`       | Adds a transient `.btn-pressed` highlight to the button matching a key.   |
 | `fitResultFont`     | Progressively scales the result font (via `--result-font-size`) so long numbers are always fully visible. |
+| `openSidebar`       | Opens the sidebar (adds `.open` class, shows overlay, updates aria attributes).                          |
+| `closeSidebar`      | Closes the sidebar and profile menu.                                                                     |
+| `toggleSidebar`     | Toggles sidebar open/closed.                                                                              |
+| `toggleProfileMenu` | Toggles the profile dropdown menu.                                                                        |
+| `closeProfileMenu`  | Closes the profile dropdown menu.                                                                         |
 
 ### 4.2 `gradient-waves.js` — Self-contained WebGL2 Background
 
