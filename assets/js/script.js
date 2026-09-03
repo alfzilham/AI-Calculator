@@ -348,3 +348,102 @@ document.addEventListener("keydown", (e) => {
 
 applyThemeMeta(body.dataset.theme);
 updateDisplay();
+
+/* ============================================================
+   Sidebar: toggle, profile menu, nav, mobile overlay, keyboard
+   ============================================================ */
+
+const sidebarEl = document.getElementById("sidebar");
+const sidebarToggleEl = document.getElementById("sidebarToggle");
+const sidebarOverlayEl = document.getElementById("sidebarOverlay");
+const sidebarProfileEl = document.getElementById("sidebarProfile");
+const profileMenuEl = document.getElementById("profileMenu");
+const profileChevronEl = document.querySelector(".sidebar-profile-chevron");
+const navButtons = document.querySelectorAll(".sidebar-nav-btn");
+
+let sidebarOpen = false;
+let profileMenuOpen = false;
+
+/* --- Sidebar open / close --- */
+
+function openSidebar() {
+  sidebarOpen = true;
+  sidebarEl.classList.add("open");
+  sidebarOverlayEl.classList.add("active");
+  sidebarOverlayEl.setAttribute("aria-hidden", "false");
+  sidebarToggleEl.setAttribute("aria-expanded", "true");
+  sidebarToggleEl.setAttribute("aria-label", "Close sidebar");
+  body.classList.add("sidebar-open");
+  /* On mobile: trap focus inside sidebar */
+  sidebarEl.focus();
+}
+
+function closeSidebar() {
+  sidebarOpen = false;
+  sidebarEl.classList.remove("open");
+  sidebarOverlayEl.classList.remove("active");
+  sidebarOverlayEl.setAttribute("aria-hidden", "true");
+  sidebarToggleEl.setAttribute("aria-expanded", "false");
+  sidebarToggleEl.setAttribute("aria-label", "Open sidebar");
+  body.classList.remove("sidebar-open");
+  closeProfileMenu();
+  sidebarToggleEl.focus();
+}
+
+function toggleSidebar() {
+  if (sidebarOpen) closeSidebar();
+  else openSidebar();
+}
+
+sidebarToggleEl.addEventListener("click", toggleSidebar);
+sidebarOverlayEl.addEventListener("click", closeSidebar);
+
+/* --- Profile dropdown --- */
+
+function toggleProfileMenu() {
+  profileMenuOpen = !profileMenuOpen;
+  profileMenuEl.classList.toggle("open", profileMenuOpen);
+  sidebarProfileEl.setAttribute("aria-expanded", String(profileMenuOpen));
+  profileChevronEl.classList.toggle("open", profileMenuOpen);
+}
+
+function closeProfileMenu() {
+  profileMenuOpen = false;
+  profileMenuEl.classList.remove("open");
+  sidebarProfileEl.setAttribute("aria-expanded", "false");
+  profileChevronEl.classList.remove("open");
+}
+
+sidebarProfileEl.addEventListener("click", toggleProfileMenu);
+
+/* Close profile menu when clicking outside */
+document.addEventListener("click", (e) => {
+  if (profileMenuOpen && !sidebarProfileEl.contains(e.target) && !profileMenuEl.contains(e.target)) {
+    closeProfileMenu();
+  }
+});
+
+/* --- Nav buttons (demo active state) --- */
+
+navButtons.forEach((btn) => {
+  btn.addEventListener("click", () => {
+    navButtons.forEach((b) => {
+      b.classList.remove("active");
+      b.removeAttribute("aria-current");
+    });
+    btn.classList.add("active");
+    btn.setAttribute("aria-current", "page");
+  });
+});
+
+/* --- Keyboard: Escape closes sidebar & profile --- */
+
+document.addEventListener("keydown", (e) => {
+  if (e.key === "Escape") {
+    if (profileMenuOpen) {
+      closeProfileMenu();
+    } else if (sidebarOpen) {
+      closeSidebar();
+    }
+  }
+});
