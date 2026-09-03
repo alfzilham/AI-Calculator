@@ -177,6 +177,12 @@ body[data-theme="light"] .icon-sun {
 }
 
 /* Ikon backspace (SVG inline) */
+.btn[data-action="backspace"] {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 .btn[data-action="backspace"] svg {
   display: block;
   width: 1em;
@@ -187,6 +193,7 @@ body[data-theme="light"] .icon-sun {
   stroke-width: 2;
   stroke-linecap: round;
   stroke-linejoin: round;
+  margin: 0 auto;
 }
 
 /* ===== Number / function buttons (Claymorphism) ===== */
