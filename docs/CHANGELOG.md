@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- Audited sidebar interactions and improved keyboard accessibility for the profile control and Search field.
 - Sidebar navigation with glassmorphism styling, collapsible on desktop and drawer overlay on mobile.
 - Brand section with "AI Calculator" name and icon in the sidebar.
 - Search bar with inline SVG icon in the sidebar.
@@ -30,6 +31,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Calculator top bar (`calc-top`) now includes a sidebar toggle button alongside the theme toggle.
 
 ### Fixed
+
+- `Escape` now closes the profile menu/sidebar before clearing the calculator, and calculator shortcuts no longer intercept text entered in the sidebar Search field.
+- Space is no longer globally blocked, preserving native keyboard activation for sidebar and calculator buttons.
 
 - Backspace SVG icon is now precisely centered in the button across all states (desktop, mobile, active, focus-visible).
 

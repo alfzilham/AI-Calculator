@@ -301,6 +301,24 @@ function flashButton(selector) {
 
 /* Keyboard support */
 document.addEventListener("keydown", (e) => {
+  if (e.key === "Escape") {
+    e.preventDefault();
+    if (profileMenuOpen) {
+      closeProfileMenu();
+    } else if (sidebarOpen) {
+      closeSidebar();
+    } else {
+      clearAll();
+      flashButton('[data-action="clear"]');
+    }
+    return;
+  }
+
+  // Jangan biarkan keyboard shortcut kalkulator mengambil alih input Search.
+  if (e.target instanceof HTMLInputElement || e.target instanceof HTMLTextAreaElement) {
+    return;
+  }
+
   if (e.key >= "0" && e.key <= "9") {
     inputNumber(e.key);
     flashButton(`[data-num="${e.key}"]`);
@@ -324,9 +342,6 @@ document.addEventListener("keydown", (e) => {
     e.preventDefault();
     equals();
     flashButton('[data-action="equals"]');
-  } else if (e.key === "Escape") {
-    clearAll();
-    flashButton('[data-action="clear"]');
   } else if (e.key === "%") {
     percent();
     flashButton('[data-action="percent"]');
@@ -334,14 +349,13 @@ document.addEventListener("keydown", (e) => {
     deleteLast();
     flashButton('[data-action="backspace"]');
   } else if (
-    e.key === " " ||
     e.key.startsWith("Arrow") ||
     e.key === "PageUp" || e.key === "PageDown" ||
     e.key === "Home" || e.key === "End"
   ) {
-    /* Mobile/hardware: blokir tombol yang bisa menggulir/melompat agar tidak
-       mengganggu kalkulator. Virtual keyboard tidak akan muncul karena halaman
-       tidak memiliki <input>/textarea sama sekali. */
+     /* Blokir tombol navigasi yang bisa menggulir/melompat halaman agar tidak
+        mengganggu kalkulator. Space sengaja tidak diblokir agar tombol native
+        tetap dapat diaktifkan melalui keyboard. */
     e.preventDefault();
   }
 });
@@ -403,6 +417,7 @@ sidebarOverlayEl.addEventListener("click", closeSidebar);
 function toggleProfileMenu() {
   profileMenuOpen = !profileMenuOpen;
   profileMenuEl.classList.toggle("open", profileMenuOpen);
+  profileMenuEl.hidden = !profileMenuOpen;
   sidebarProfileEl.setAttribute("aria-expanded", String(profileMenuOpen));
   profileChevronEl.classList.toggle("open", profileMenuOpen);
 }
@@ -410,6 +425,7 @@ function toggleProfileMenu() {
 function closeProfileMenu() {
   profileMenuOpen = false;
   profileMenuEl.classList.remove("open");
+  profileMenuEl.hidden = true;
   sidebarProfileEl.setAttribute("aria-expanded", "false");
   profileChevronEl.classList.remove("open");
 }
@@ -434,16 +450,4 @@ navButtons.forEach((btn) => {
     btn.classList.add("active");
     btn.setAttribute("aria-current", "page");
   });
-});
-
-/* --- Keyboard: Escape closes sidebar & profile --- */
-
-document.addEventListener("keydown", (e) => {
-  if (e.key === "Escape") {
-    if (profileMenuOpen) {
-      closeProfileMenu();
-    } else if (sidebarOpen) {
-      closeSidebar();
-    }
-  }
 });

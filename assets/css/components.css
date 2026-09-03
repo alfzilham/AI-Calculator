@@ -537,6 +537,7 @@ body[data-theme="light"] .sidebar-search-input:focus {
 /* ===== Sidebar Profile ===== */
 
 .sidebar-profile {
+  width: 100%;
   display: flex;
   align-items: center;
   gap: 10px;
@@ -545,6 +546,9 @@ body[data-theme="light"] .sidebar-search-input:focus {
   background: var(--sidebar-profile-bg);
   border: var(--sidebar-profile-border);
   cursor: pointer;
+  color: inherit;
+  font: inherit;
+  text-align: left;
   transition: background 0.15s ease;
 }
 
@@ -646,6 +650,10 @@ body[data-theme="light"] .sidebar-profile-menu {
   opacity: 1;
   visibility: visible;
   transform: translateY(0);
+}
+
+.sidebar-profile-menu[hidden] {
+  display: none;
 }
 
 .sidebar-profile-menu-item {

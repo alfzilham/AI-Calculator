@@ -157,8 +157,8 @@ flowchart LR
 | `syncWavesTheme`    | Pushes the theme's wave colors into the WebGL instance via `setColors`.   |
 | `flashButton`       | Adds a transient `.btn-pressed` highlight to the button matching a key.   |
 | `fitResultFont`     | Progressively scales the result font (via `--result-font-size`) so long numbers are always fully visible. |
-| `openSidebar`       | Opens the sidebar (adds `.open` class, shows overlay, updates aria attributes).                          |
-| `closeSidebar`      | Closes the sidebar and profile menu.                                                                     |
+| `openSidebar`       | Opens the sidebar (adds `.open` class, shows overlay, updates aria attributes, and moves focus to the sidebar). |
+| `closeSidebar`      | Closes the sidebar and profile menu, then returns focus to the toggle.                                   |
 | `toggleSidebar`     | Toggles sidebar open/closed.                                                                              |
 | `toggleProfileMenu` | Toggles the profile dropdown menu.                                                                        |
 | `closeProfileMenu`  | Closes the profile dropdown menu.                                                                         |
@@ -215,7 +215,7 @@ flowchart LR
     KEY --> FLASH["flashButton() → .btn-pressed (150ms)"]
 ```
 
-**Keyboard → button mapping (sync):** every mapped key also flashes its corresponding button so the UI visibly echoes the keystroke. Scroll/navigation keys are intercepted (`preventDefault`) so a hardware keyboard cannot scroll or jump the page.
+**Keyboard → button mapping (sync):** every mapped key also flashes its corresponding button so the UI visibly echoes the keystroke. Arrow, paging, and Home/End navigation keys are intercepted (`preventDefault`) so a hardware keyboard cannot scroll or jump the page; Space remains available for native button activation. Calculator shortcuts are ignored while typing in the sidebar Search field.
 
 ---
 

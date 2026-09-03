@@ -94,6 +94,12 @@ Concise decision log. See `docs/ARCHITECTURE.md` for the resulting structure and
 
 ---
 
+### ADR-010 — Preserve native keyboard interaction in sidebar controls
+
+- **Context:** The global calculator key handler originally blocked Space and processed keys even when focus was inside the sidebar Search field. This prevented native button activation and could mutate calculator state while typing a search query.
+- **Decision:** Keep Space available for native controls and ignore calculator shortcuts while focus is inside text inputs. Escape closes the profile menu/sidebar before falling back to clearing the calculator.
+- **Consequence:** Sidebar controls remain accessible by keyboard, and Search input behaves independently from calculator input.
+
 ## 4. Conventions
 
 **Language & naming**

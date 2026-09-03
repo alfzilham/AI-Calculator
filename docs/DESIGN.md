@@ -273,7 +273,7 @@ Number formatting uses automatic thousands separators (`,`) via `formatNumber()`
 | `%`            | Percent             |
 | `Backspace`    | Delete last digit   |
 
-When a key is pressed, the matching button briefly lights up (`.btn-pressed`, ~150ms) so the keyboard input feels visually in sync with the UI. Scroll/navigation keys (`Space`, arrows, `PageUp/Down`, `Home/End`) are blocked so they cannot scroll or jump while using a hardware keyboard; the on-screen virtual keyboard never appears because the page has no `<input>`/textarea elements.
+When a key is pressed, the matching button briefly lights up (`.btn-pressed`, ~150ms) so the keyboard input feels visually in sync with the UI. Arrow, `PageUp/Down`, `Home`, and `End` keys are blocked so they cannot scroll or jump while using a hardware keyboard. Space is left available for native button activation, and calculator shortcuts are ignored while typing in the sidebar Search field.
 
 ---
 
@@ -316,7 +316,7 @@ The button grid (`grid-template-columns: repeat(4, 1fr)`) stays proportional at 
 ## 7. Accessibility
 
 - The theme button has `aria-label="Toggle dark and light mode"` for screen readers.
-- All buttons are real `<button>` elements (not `<div>`), so they automatically get keyboard focus (Tab) and can be activated with Enter/Space.
+- All interactive controls use semantic buttons or inputs, so they can receive keyboard focus (Tab) and be activated with Enter/Space. The profile trigger is a native button and its menu starts hidden from the accessibility tree.
 - `.result` and `.history` use `aria-live="polite"` so value changes are read aloud by screen readers.
 - Buttons have a `:focus-visible` style (orange ring) for clear keyboard navigation.
 - Text contrast is maintained in both themes: pure white on a dark semi-transparent card, dark brown (`#211e17`) on a light card — not medium gray, which risks failing WCAG AA.

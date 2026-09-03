@@ -74,14 +74,14 @@ The app is a single-page calculator supporting the four basic arithmetic operati
 | ----- | -------------------------------------------------------------------------------------------------------- | --------------------------- |
 | FR-23 | All on-screen actions are reachable from the keyboard (`0–9`, `.`, `+ - * /`, `Enter`/`=`, `Escape`, `%`, `Backspace`). | `keydown` handler |
 | FR-24 | The button matching a pressed key flashes briefly (`.btn-pressed`, 150 ms).                              | `flashButton()`             |
-| FR-25 | Scroll/navigation keys (`Space`, arrows, `PageUp/Down`, `Home/End`) are intercepted so they cannot scroll or jump the page. | `keydown` guard |
+| FR-25 | Arrow/navigation keys (`Arrow*`, `PageUp/Down`, `Home/End`) are intercepted so they cannot scroll or jump the page, while Space remains available for native button activation. | `keydown` guard |
 
 ### 2.7 Accessibility
 
 | ID    | Requirement                                                                                          | Implementation             |
 | ----- | ---------------------------------------------------------------------------------------------------- | -------------------------- |
 | FR-26 | Theme button exposes `aria-label="Toggle dark and light mode"`.                                      | `index.html`               |
-| FR-27 | All buttons are native `<button>` elements (keyboard focusable, Enter/Space activatable).             | `index.html`               |
+| FR-27 | All interactive controls use semantic native elements and remain keyboard focusable and Enter/Space activatable. | `index.html` / `script.js` |
 | FR-28 | `result` and `history` use `aria-live="polite"`.                                                      | `index.html`               |
 | FR-29 | Focus is visible via an orange `:focus-visible` ring.                                                 | `components.css`           |
 | FR-30 | Page zoom is not blocked (no `maximum-scale` restriction in the viewport).                            | `index.html`               |
@@ -214,8 +214,8 @@ Manual test checklist. Each row maps to the requirements above.
 | 14 | `999999999999` `×` `999999999999` `=`                            | Display uses `toPrecision(10)` fallback, finite value    | FR-19     |
 | 15 | Click theme button                                               | Theme toggles; meta theme-color and wave colors follow   | FR-21/22  |
 | 16 | Press `2`, `+`, `3`, `Enter` on keyboard                         | Display `5`; each key flashes its button                 | FR-23/24  |
-| 17 | Press `Space`/arrow keys on keyboard                             | Page does not scroll/jump                                | FR-25     |
-| 18 | Tab through buttons                                              | Visible focus ring; Enter/Space activate buttons         | FR-27/29  |
+| 17 | Press arrow/navigation keys on keyboard                         | Page does not scroll/jump                                | FR-25     |
+| 18 | Press Space on a focused button; type in Search                  | Button activates; calculator state remains unchanged     | FR-27/29  |
 | 19 | DevTools device mode; tap buttons                                | No virtual keyboard appears; calculator usable           | FR-30/NFR |
 | 20 | Disable WebGL2 (browser flag)                                    | Solid background, calculator still works, warning logged | NFR-02    |
 | 21 | Enter 12 digits (`888888888888`)                                  | Full number visible, font shrinks, no `...`              | FR-31     |
