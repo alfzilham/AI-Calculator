@@ -27,3 +27,44 @@
     max-width: 380px;
   }
 }
+
+/* ===== Sidebar: mobile drawer behavior ===== */
+
+body.sidebar-open {
+  overflow: hidden;
+}
+
+/* Mobile: sidebar becomes a full-height overlay drawer */
+@media (max-width: 768px) {
+  .sidebar {
+    width: 280px;
+    max-width: 85vw;
+  }
+
+  .sidebar-inner {
+    border-radius: 0 16px 16px 0;
+  }
+
+  body:not(.sidebar-open) .sidebar {
+    transform: translateX(-100%);
+  }
+}
+
+/* Desktop: sidebar as a side panel */
+@media (min-width: 769px) {
+  body {
+    padding-left: 24px;
+  }
+
+  body.sidebar-open {
+    padding-left: 284px;
+  }
+
+  .calculator {
+    transition: transform 0.3s ease;
+  }
+
+  .sidebar-overlay {
+    display: none;
+  }
+}
