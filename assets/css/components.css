@@ -441,6 +441,19 @@ body[data-theme="light"] .sidebar-search-input:focus {
   background: var(--sidebar-active-bg);
   color: var(--sidebar-active-color);
   font-weight: 600;
+  position: relative;
+}
+
+.sidebar-nav-btn.active::before {
+  content: "";
+  position: absolute;
+  left: -16px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 3px;
+  height: 20px;
+  border-radius: 0 3px 3px 0;
+  background: var(--sidebar-active-color);
 }
 
 .sidebar-nav-btn:focus-visible {
