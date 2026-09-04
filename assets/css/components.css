@@ -41,7 +41,7 @@ body[data-theme="light"] .calculator {
 .sidebar-toggle {
   position: fixed;
   top: max(16px, env(safe-area-inset-top));
-  right: max(16px, env(safe-area-inset-right));
+  left: max(16px, env(safe-area-inset-left));
   width: 44px;
   height: 44px;
   border-radius: 16px;
@@ -78,11 +78,12 @@ body[data-theme="light"] .calculator {
 
 .sidebar-toggle svg line {
   transition: transform 0.25s ease, opacity 0.25s ease;
+  transform-box: fill-box;
   transform-origin: center;
 }
 
 body.sidebar-open .sidebar-toggle svg line:nth-child(1) {
-  transform: rotate(45deg) translate(4px, -4px);
+  transform: translateY(6px) rotate(45deg);
 }
 
 body.sidebar-open .sidebar-toggle svg line:nth-child(2) {
@@ -90,7 +91,7 @@ body.sidebar-open .sidebar-toggle svg line:nth-child(2) {
 }
 
 body.sidebar-open .sidebar-toggle svg line:nth-child(3) {
-  transform: rotate(-45deg) translate(4px, 4px);
+  transform: translateY(-6px) rotate(-45deg);
 }
 
 .theme-btn {

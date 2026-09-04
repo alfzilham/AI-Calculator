@@ -103,7 +103,7 @@ Concise decision log. See `docs/ARCHITECTURE.md` for the resulting structure and
 ### ADR-011 — Keep sidebar toggle independent from calculator card
 
 - **Context:** The sidebar control belongs to the page shell and should remain accessible regardless of the calculator card's position or responsive layout.
-- **Decision:** Render the toggle outside `.calculator` and position it fixed at the viewport's top-right, above the sidebar overlay layer.
+- **Decision:** Render the toggle outside `.calculator` and position it fixed at the viewport's top-left, above the sidebar overlay layer. Animate its three centered horizontal lines into an X when open.
 - **Consequence:** The calculator top bar remains dedicated to calculator controls, while the global sidebar control stays consistently positioned on desktop and mobile.
 
 ## 4. Conventions

@@ -15,7 +15,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Search bar with inline SVG icon in the sidebar.
 - Navigation menu: Home (active), AI Chatbot (demo), Projects (demo), Settings (demo) — all with inline SVG icons and semantic `<button>` elements.
 - Sticky user profile section at the bottom of the sidebar with avatar, name ("Alfiz"), plan status ("Free Plan"), and dropdown menu (Settings, Upgrade plan, Log out).
-- Sidebar toggle button (hamburger ↔ X) fixed to the viewport's top-right with aria-label and aria-expanded support.
+- Sidebar toggle button (hamburger ↔ X) fixed to the viewport's top-left with aria-label and aria-expanded support.
 - Mobile overlay backdrop behind sidebar; click backdrop or press Escape to close.
 - Sidebar toggle behavior: `toggleSidebar()`, `openSidebar()`, `closeSidebar()`, `toggleProfileMenu()` functions.
 - Keyboard support: Escape key closes profile menu first, then sidebar.
@@ -27,7 +27,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
-- Moved the sidebar toggle from the calculator card to a fixed control at the top-right of the viewport.
+- Positioned the sidebar toggle as a fixed control at the top-left of the viewport, outside the calculator card.
+- Replaced the incorrect arrow-like open state with a true hamburger-to-X line animation.
 
 - Backspace button icon alignment fixed: button now uses `display: flex; align-items: center; justify-content: center` to perfectly center the SVG icon horizontally and vertically.
 - Calculator top bar (`calc-top`) now remains dedicated to the theme toggle; the sidebar toggle is a global viewport control.
