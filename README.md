@@ -61,7 +61,7 @@ AICalculator/
 - **`backdrop-filter`**: without support, the card renders as a semi-transparent color without blur (safe degradation).
 - **`prefers-reduced-motion`** is respected: wave animation is disabled and CSS transitions are removed.
 - No external dependencies (theme icons and sidebar icons inlined as SVG).
-- **Sidebar** is collapsible on desktop and becomes a drawer overlay on mobile. Escape key and backdrop click close the sidebar; the Search field and native sidebar controls remain keyboard-friendly.
+- **Sidebar** is collapsible on desktop and becomes a drawer overlay on mobile. Its toggle is fixed to the top-right of the viewport, outside the calculator card. Escape key and backdrop click close the sidebar; the Search field and native sidebar controls remain keyboard-friendly.
 
 ## Development Rules
 
