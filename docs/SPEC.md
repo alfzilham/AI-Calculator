@@ -104,7 +104,7 @@ The app is a single-page calculator supporting the four basic arithmetic operati
 | FR-38 | Navigation menu includes Home (active), AI Chatbot (demo), Projects (demo), Settings (demo).         | `index.html` sidebar-nav       |
 | FR-39 | Home nav item has `aria-current="page"` and visual active state (background + left indicator bar).   | `index.html` + `components.css`|
 | FR-40 | Demo nav items (Chatbot, Projects, Settings) display a "Demo" badge.                                | `index.html` sidebar-nav-badge |
-| FR-41 | Sidebar toggle button (hamburger) is in the calculator top bar with `aria-label` and `aria-expanded`.| `index.html` sidebar-toggle    |
+| FR-41 | Sidebar toggle button (hamburger) is fixed to the top-right of the viewport, outside the calculator card, with `aria-label` and `aria-expanded`. | `index.html` sidebar-toggle    |
 | FR-42 | Sidebar opens/closes with smooth CSS transform transition.                                           | `openSidebar()`/`closeSidebar()`|
 | FR-43 | On desktop (`≥769px`), sidebar slides from left as a side panel; calculator shifts right.            | `responsive.css`               |
 | FR-44 | On mobile (`≤768px`), sidebar becomes a full-height overlay drawer with semi-transparent backdrop.    | `responsive.css`               |

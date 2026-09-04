@@ -93,7 +93,7 @@ flowchart TB
 | ---------------- | ----------------------------------------------------------------------------------------------- |
 | `variable.css`   | All design tokens as CSS custom properties scoped under `body[data-theme="dark"]` / `body[data-theme="light"]`, including sidebar tokens. |
 | `global.css`     | Universal reset, base `body` layout (centered flex, `overflow: hidden`), and the `.waves-bg` fixed full-screen layer. |
-| `components.css` | Glass card (`.calculator`), display (`.result`/`.history`), theme button (`.theme-btn`), sidebar toggle (`.sidebar-toggle`), sidebar (`.sidebar`), button grid (`.btn*`), focus-visible styles, and keyboard-sync `.btn-pressed` state. |
+| `components.css` | Glass card (`.calculator`), display (`.result`/`.history`), theme button (`.theme-btn`), fixed viewport sidebar toggle (`.sidebar-toggle`), sidebar (`.sidebar`), button grid (`.btn*`), focus-visible styles, and keyboard-sync `.btn-pressed` state. |
 | `responsive.css` | Mobile-first breakpoints (`≤360px` shrink, `≥480px` widen), sidebar drawer behavior (`≤768px` mobile overlay, `≥769px` desktop side panel). |
 
 **Theming contract:** the `data-theme` attribute on `<body>` is the single source of truth for the theme. Every color token is defined once per theme in `variable.css`; components consume them via `var(--token)`.

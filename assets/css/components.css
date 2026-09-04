@@ -39,6 +39,9 @@ body[data-theme="light"] .calculator {
 /* ===== Sidebar toggle (hamburger) ===== */
 
 .sidebar-toggle {
+  position: fixed;
+  top: max(16px, env(safe-area-inset-top));
+  right: max(16px, env(safe-area-inset-right));
   width: 44px;
   height: 44px;
   border-radius: 16px;
@@ -47,6 +50,7 @@ body[data-theme="light"] .calculator {
   align-items: center;
   justify-content: center;
   cursor: pointer;
+  z-index: 120;
   transition: background 0.4s ease, color 0.4s ease, transform 0.15s ease, box-shadow 0.15s ease;
   background: var(--theme-bg);
   color: var(--theme-color);
