@@ -93,7 +93,7 @@ flowchart TB
 | ---------------- | ----------------------------------------------------------------------------------------------- |
 | `variable.css`   | All design tokens as CSS custom properties scoped under `body[data-theme="dark"]` / `body[data-theme="light"]`, including sidebar tokens. |
 | `global.css`     | Universal reset, base `body` layout (centered flex, `overflow: hidden`), and the `.waves-bg` fixed full-screen layer. |
-| `components.css` | Glass card (`.calculator`), display (`.result`/`.history`), theme button (`.theme-btn`), fixed top-left viewport sidebar toggle (`.sidebar-toggle`), sidebar (`.sidebar`), button grid (`.btn*`), focus-visible styles, and keyboard-sync `.btn-pressed` state. |
+| `components.css` | Glass card (`.calculator`), display (`.result`/`.history`), theme button (`.theme-btn`), viewport/sidebar-header toggle (`.sidebar-toggle`), sidebar (`.sidebar`), button grid (`.btn*`), focus-visible styles, and keyboard-sync `.btn-pressed` state. |
 | `responsive.css` | Mobile-first breakpoints (`≤360px` shrink, `≥480px` widen), sidebar drawer behavior (`≤768px` mobile overlay, `≥769px` desktop side panel). |
 
 **Theming contract:** the `data-theme` attribute on `<body>` is the single source of truth for the theme. Every color token is defined once per theme in `variable.css`; components consume them via `var(--token)`.
@@ -157,8 +157,8 @@ flowchart LR
 | `syncWavesTheme`    | Pushes the theme's wave colors into the WebGL instance via `setColors`.   |
 | `flashButton`       | Adds a transient `.btn-pressed` highlight to the button matching a key.   |
 | `fitResultFont`     | Progressively scales the result font (via `--result-font-size`) so long numbers are always fully visible. |
-| `openSidebar`       | Opens the sidebar (adds `.open` class, shows overlay, updates aria attributes, and moves focus to the sidebar). |
-| `closeSidebar`      | Closes the sidebar and profile menu, then returns focus to the toggle.                                   |
+| `openSidebar`       | Moves the toggle into the sidebar header, opens the sidebar (adds `.open`, shows overlay, updates aria attributes), and moves focus to the sidebar. |
+| `closeSidebar`      | Moves the toggle back to the viewport dock, closes the sidebar and profile menu, then returns focus to the toggle. |
 | `toggleSidebar`     | Toggles sidebar open/closed.                                                                              |
 | `toggleProfileMenu` | Toggles the profile dropdown menu.                                                                        |
 | `closeProfileMenu`  | Closes the profile dropdown menu.                                                                         |

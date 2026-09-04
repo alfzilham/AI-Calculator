@@ -29,6 +29,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Positioned the sidebar toggle as a fixed control at the top-left of the viewport, outside the calculator card.
 - Replaced the incorrect arrow-like open state with a true hamburger-to-X line animation.
+- Moves the same sidebar toggle into the sidebar header beside the brand while the sidebar is open, avoiding z-index overlap with the panel.
 
 - Backspace button icon alignment fixed: button now uses `display: flex; align-items: center; justify-content: center` to perfectly center the SVG icon horizontally and vertically.
 - Calculator top bar (`calc-top`) now remains dedicated to the theme toggle; the sidebar toggle is a global viewport control.

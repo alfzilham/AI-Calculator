@@ -149,7 +149,7 @@ Current grid layout (4×6, no empty cells):
 }
 ```
 
-The sidebar toggle is a global fixed control in the viewport's top-left corner, outside the calculator card. It shows three horizontal lines while closed and uses centered line transforms to animate into an X while open. It remains above the mobile drawer/backdrop so the same control can close the sidebar after it opens.
+The sidebar toggle is fixed in the viewport's top-left corner while closed. When the sidebar opens, JavaScript moves the same button into the sidebar header beside the brand, where it remains reachable without overlapping the logo. It shows three horizontal lines while closed and uses centered line transforms to animate into an X while open.
 
 - **Blur 28px + saturate 160%** was chosen so the waves colors behind stay "alive" when filtered, rather than fading to gray.
 - The card background uses a transparent `linear-gradient` (not flat color) so the glass effect feels like it has volume/light direction.

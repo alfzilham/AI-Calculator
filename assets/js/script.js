@@ -369,6 +369,8 @@ updateDisplay();
 
 const sidebarEl = document.getElementById("sidebar");
 const sidebarToggleEl = document.getElementById("sidebarToggle");
+const sidebarToggleDockEl = document.getElementById("sidebarToggleDock");
+const sidebarHeaderToggleDockEl = document.getElementById("sidebarHeaderToggleDock");
 const sidebarOverlayEl = document.getElementById("sidebarOverlay");
 const sidebarProfileEl = document.getElementById("sidebarProfile");
 const profileMenuEl = document.getElementById("profileMenu");
@@ -382,6 +384,7 @@ let profileMenuOpen = false;
 
 function openSidebar() {
   sidebarOpen = true;
+  sidebarHeaderToggleDockEl.appendChild(sidebarToggleEl);
   sidebarEl.classList.add("open");
   sidebarOverlayEl.classList.add("active");
   sidebarOverlayEl.setAttribute("aria-hidden", "false");
@@ -394,6 +397,7 @@ function openSidebar() {
 
 function closeSidebar() {
   sidebarOpen = false;
+  sidebarToggleDockEl.appendChild(sidebarToggleEl);
   sidebarEl.classList.remove("open");
   sidebarOverlayEl.classList.remove("active");
   sidebarOverlayEl.setAttribute("aria-hidden", "true");
