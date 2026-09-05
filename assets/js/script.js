@@ -857,11 +857,6 @@ function bindDetailEvents(project) {
     });
   }
 
-  /* Close menus on outside click */
-  document.addEventListener("click", () => {
-    if (menuDropdown) menuDropdown.hidden = true;
-    if (menuBtn) menuBtn.setAttribute("aria-expanded", "false");
-  });
 }
 
 /* --- Demo chat --- */
@@ -1089,13 +1084,6 @@ function bindProjectsListEvents() {
     });
   }
 
-  /* Close sort menu on outside click */
-  document.addEventListener("click", (e) => {
-    if (sortMenu && !sortMenu.hidden && !sortBtn.contains(e.target) && !sortMenu.contains(e.target)) {
-      sortMenu.hidden = true;
-    }
-  });
-
   /* New project button */
   if (newBtn) {
     newBtn.addEventListener("click", openCreateProjectModal);
@@ -1139,12 +1127,6 @@ function bindProjectsListEvents() {
     });
   });
 
-  /* Close overflow menus on outside click */
-  document.addEventListener("click", () => {
-    document.querySelectorAll(".project-card-menu-dropdown").forEach((d) => { d.hidden = true; });
-    document.querySelectorAll(".project-card-menu").forEach((b) => { b.setAttribute("aria-expanded", "false"); });
-  });
-
   /* Menu item actions */
   document.querySelectorAll(".project-card-menu-item").forEach((item) => {
     item.addEventListener("click", (e) => {
@@ -1174,6 +1156,23 @@ function bindProjectsListEvents() {
     });
   });
 }
+
+/* Close dynamic Projects menus with one stable document listener. */
+document.addEventListener("click", (e) => {
+  if (!e.target.closest(".projects-sort-wrapper")) {
+    const sortMenu = document.getElementById("projectsSortMenu");
+    if (sortMenu) sortMenu.hidden = true;
+  }
+
+  if (!e.target.closest(".project-card-menu-wrapper")) {
+    document.querySelectorAll(".project-card-menu-dropdown").forEach((dropdown) => {
+      dropdown.hidden = true;
+    });
+    document.querySelectorAll(".project-card-menu").forEach((button) => {
+      button.setAttribute("aria-expanded", "false");
+    });
+  }
+});
 
 /* --- Nav buttons (demo active state + page switching) --- */
 

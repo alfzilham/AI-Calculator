@@ -163,6 +163,8 @@ flowchart LR
 | `toggleProfileMenu` | Toggles the profile dropdown menu.                                                                        |
 | `closeProfileMenu`  | Closes the profile dropdown menu.                                                                         |
 
+Dynamic Projects list/detail menus share one document-level outside-click listener so repeated view renders do not accumulate event handlers.
+
 ### 4.2 `gradient-waves.js` — Self-contained WebGL2 Background
 
 A single IIFE that exposes `window.GradientWaves(container, opts)` and returns an instance object `{ setColors(horizon, wave, crest), destroy() }`.

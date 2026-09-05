@@ -15,6 +15,7 @@ A **vanilla HTML/CSS/JS** calculator with no framework and no build tools. Inspi
 - Full keyboard support
 - Responsive (mobile-first)
 - **localStorage** persistence for projects data
+- Projects list controls remain stable while filtering, sorting, and re-rendering project cards.
 
 ## Running
 
