@@ -619,6 +619,55 @@ function escapeHtml(str) {
   return div.innerHTML;
 }
 
+/* --- Create project modal --- */
+
+const createOverlayEl = document.getElementById("createProjectOverlay");
+const createNameInput = document.getElementById("projectNameInput");
+const createDescInput = document.getElementById("projectDescInput");
+const createErrorEl = document.getElementById("projectNameError");
+const createCloseBtn = document.getElementById("createProjectClose");
+const createCancelBtn = document.getElementById("createProjectCancel");
+const createSubmitBtn = document.getElementById("createProjectSubmit");
+let lastCreateFocusEl = null;
+
+function openCreateProjectModal() {
+  lastCreateFocusEl = document.activeElement;
+  createNameInput.value = "";
+  createDescInput.value = "";
+  createErrorEl.textContent = "";
+  createOverlayEl.hidden = false;
+  createOverlayEl.classList.add("active");
+  createOverlayEl.setAttribute("aria-hidden", "false");
+  createNameInput.focus();
+}
+
+function closeCreateProjectModal() {
+  createOverlayEl.classList.remove("active");
+  createOverlayEl.setAttribute("aria-hidden", "true");
+  createOverlayEl.hidden = true;
+  createErrorEl.textContent = "";
+  if (lastCreateFocusEl) lastCreateFocusEl.focus();
+}
+
+function validateProjectName(name) {
+  if (!name || !name.trim()) {
+    createErrorEl.textContent = "Project name is required.";
+    createNameInput.focus();
+    return false;
+  }
+  createErrorEl.textContent = "";
+  return true;
+}
+
+if (createCloseBtn) createCloseBtn.addEventListener("click", closeCreateProjectModal);
+if (createCancelBtn) createCancelBtn.addEventListener("click", closeCreateProjectModal);
+
+if (createOverlayEl) {
+  createOverlayEl.addEventListener("click", (e) => {
+    if (e.target === createOverlayEl) closeCreateProjectModal();
+  });
+}
+
 /* --- Filter & Sort --- */
 
 function filterProjects(list) {
