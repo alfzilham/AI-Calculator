@@ -619,7 +619,7 @@ function escapeHtml(str) {
   return div.innerHTML;
 }
 
-/* --- Filter & Sort (stubs — implemented in later commits) --- */
+/* --- Filter & Sort --- */
 
 function filterProjects(list) {
   if (!projectSearchQuery) return list;
@@ -645,7 +645,18 @@ function sortProjects(list) {
   return [...pinned, ...unpinned];
 }
 
-/* --- Persistence (stubs — implemented in later commit) --- */
+/* --- Project pin toggle --- */
+
+function toggleProjectPin(id) {
+  const project = projects.find((p) => p.id === id);
+  if (!project) return;
+  project.pinned = !project.pinned;
+  project.updatedAt = new Date().toISOString();
+  saveProjects();
+  renderProjectsPage();
+}
+
+/* --- Persistence --- */
 
 function saveProjects() {
   try {
