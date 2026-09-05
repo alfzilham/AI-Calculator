@@ -863,6 +863,47 @@ function bindDetailEvents(project) {
   });
 }
 
+/* --- Demo chat --- */
+
+function sendDemoMessage(inputEl) {
+  const text = inputEl.value.trim();
+  if (!text) return;
+
+  const messagesEl = document.getElementById("chatMessages");
+  if (!messagesEl) return;
+
+  /* Remove empty state if present */
+  const emptyState = messagesEl.querySelector(".projects-chat-empty");
+  if (emptyState) emptyState.remove();
+
+  /* Add user message */
+  const userMsg = document.createElement("div");
+  userMsg.className = "projects-chat-msg projects-chat-msg-user";
+  userMsg.textContent = text;
+  messagesEl.appendChild(userMsg);
+
+  inputEl.value = "";
+  inputEl.style.height = "auto";
+  messagesEl.scrollTop = messagesEl.scrollHeight;
+
+  /* Show loading dots */
+  const loadingMsg = document.createElement("div");
+  loadingMsg.className = "projects-chat-msg projects-chat-msg-loading";
+  loadingMsg.innerHTML = "<span></span><span></span><span></span>";
+  messagesEl.appendChild(loadingMsg);
+  messagesEl.scrollTop = messagesEl.scrollHeight;
+
+  /* Simulate demo response after delay */
+  setTimeout(() => {
+    loadingMsg.remove();
+    const demoMsg = document.createElement("div");
+    demoMsg.className = "projects-chat-msg projects-chat-msg-demo";
+    demoMsg.textContent = "This is a demo response for your project. In a real implementation, this would connect to an AI backend.";
+    messagesEl.appendChild(demoMsg);
+    messagesEl.scrollTop = messagesEl.scrollHeight;
+  }, 800);
+}
+
 /* --- Create project modal --- */
 
 const createOverlayEl = document.getElementById("createProjectOverlay");
