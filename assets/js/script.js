@@ -518,6 +518,153 @@ function seedProjects() {
   });
 }
 
+/* --- Rendering: projects list view --- */
+
+function renderProjectsPage() {
+  const container = projectsViewEl.querySelector(".projects-container");
+  if (!container) return;
+
+  const filtered = filterProjects(projects);
+  const sorted = sortProjects(filtered);
+
+  container.innerHTML = `
+    <div class="projects-header">
+      <h1 class="projects-title">Projects</h1>
+      <div class="projects-actions">
+        <button class="projects-action-btn" id="projectsSearchBtn" aria-label="Search projects">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="11" cy="11" r="8"></circle><line x1="21" x2="16.65" y1="21" y2="16.65"></line></svg>
+        </button>
+        <div class="projects-search-inline" id="projectsSearchInline" hidden>
+          <input type="search" class="projects-search-input" id="projectsSearchInput" placeholder="Search projects..." aria-label="Search projects">
+          <button class="projects-search-clear" id="projectsSearchClear" aria-label="Clear search">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><line x1="18" x2="6" y1="6" y2="18"></line><line x1="6" x2="18" y1="6" y2="18"></line></svg>
+          </button>
+        </div>
+        <div class="projects-sort-wrapper">
+          <button class="projects-action-btn" id="projectsSortBtn" aria-label="Sort projects" aria-haspopup="listbox">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><line x1="4" x2="20" y1="6" y2="6"></line><line x1="4" x2="14" y1="12" y2="12"></line><line x1="4" x2="10" y1="18" y2="18"></line></svg>
+          </button>
+          <div class="projects-sort-menu" id="projectsSortMenu" role="listbox" aria-label="Sort options" hidden>
+            <button class="projects-sort-option${projectSortMode === "recent" ? " active" : ""}" role="option" aria-selected="${projectSortMode === "recent"}" data-sort="recent">Recently updated</button>
+            <button class="projects-sort-option${projectSortMode === "name-asc" ? " active" : ""}" role="option" aria-selected="${projectSortMode === "name-asc"}" data-sort="name-asc">Name A–Z</button>
+            <button class="projects-sort-option${projectSortMode === "name-desc" ? " active" : ""}" role="option" aria-selected="${projectSortMode === "name-desc"}" data-sort="name-desc">Name Z–A</button>
+          </div>
+        </div>
+        <button class="projects-new-btn" id="projectsNewBtn">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><line x1="12" x2="12" y1="5" y2="19"></line><line x1="5" x2="19" y1="12" y2="12"></line></svg>
+          <span>New project</span>
+        </button>
+      </div>
+    </div>
+    <div class="projects-grid" id="projectsGrid">
+      ${sorted.length === 0 ? renderEmptyState() : sorted.map(renderProjectCard).join("")}
+    </div>
+  `;
+
+  bindProjectsListEvents();
+}
+
+function renderEmptyState() {
+  return `
+    <div class="projects-empty">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false" class="projects-empty-icon"><path d="M20 20a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-7.9a2 2 0 0 1-1.69-.9L9.6 3.9A2 2 0 0 0 7.93 3H4a2 2 0 0 0-2 2v13a2 2 0 0 0 2 2Z"></path></svg>
+      <p class="projects-empty-text">No projects found</p>
+      <p class="projects-empty-hint">Create a new project to get started.</p>
+    </div>
+  `;
+}
+
+function renderProjectCard(project) {
+  const timeAgo = formatTimeAgo(project.updatedAt);
+  return `
+    <div class="project-card" data-project-id="${project.id}" tabindex="0" role="button" aria-label="Open project ${project.name}">
+      <div class="project-card-header">
+        <h3 class="project-card-name">${escapeHtml(project.name)}</h3>
+        <div class="project-card-actions">
+          <button class="project-card-pin${project.pinned ? " pinned" : ""}" data-pin-id="${project.id}" aria-label="${project.pinned ? "Unpin" : "Pin"} project ${project.name}" title="${project.pinned ? "Unpin" : "Pin"}">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="${project.pinned ? "currentColor" : "none"}" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><line x1="12" x2="12" y1="17" y2="22"></line><path d="M5 17h14v-1.76a2 2 0 0 0-1.11-1.79l-1.78-.9A2 2 0 0 1 15 10.76V6h1a2 2 0 0 0 0-4H8a2 2 0 0 0 0 4h1v4.76a2 2 0 0 1-1.11 1.79l-1.78.9A2 2 0 0 0 5 15.24Z"></path></svg>
+          </button>
+          <div class="project-card-menu-wrapper">
+            <button class="project-card-menu" data-menu-id="${project.id}" aria-label="More options for ${project.name}" aria-haspopup="menu" aria-expanded="false">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="1"></circle><circle cx="19" cy="12" r="1"></circle><circle cx="5" cy="12" r="1"></circle></svg>
+            </button>
+            <div class="project-card-menu-dropdown" data-menu-dropdown-id="${project.id}" role="menu" hidden>
+              <button class="project-card-menu-item" role="menuitem" data-action="rename" data-rename-id="${project.id}">Rename</button>
+              <button class="project-card-menu-item project-card-menu-item-danger" role="menuitem" data-action="delete" data-delete-id="${project.id}">Delete</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <p class="project-card-desc">${escapeHtml(project.description || "No description")}</p>
+      <span class="project-card-time">${timeAgo}</span>
+    </div>
+  `;
+}
+
+function formatTimeAgo(isoStr) {
+  const diff = Date.now() - new Date(isoStr).getTime();
+  const mins = Math.floor(diff / 60000);
+  if (mins < 1) return "Just now";
+  if (mins < 60) return `${mins}m ago`;
+  const hrs = Math.floor(mins / 60);
+  if (hrs < 24) return `${hrs}h ago`;
+  const days = Math.floor(hrs / 24);
+  if (days < 30) return `${days}d ago`;
+  return new Date(isoStr).toLocaleDateString();
+}
+
+function escapeHtml(str) {
+  const div = document.createElement("div");
+  div.textContent = str;
+  return div.innerHTML;
+}
+
+/* --- Filter & Sort (stubs — implemented in later commits) --- */
+
+function filterProjects(list) {
+  if (!projectSearchQuery) return list;
+  const q = projectSearchQuery.toLowerCase();
+  return list.filter(
+    (p) => p.name.toLowerCase().includes(q) || p.description.toLowerCase().includes(q)
+  );
+}
+
+function sortProjects(list) {
+  const copy = [...list];
+  const pinned = copy.filter((p) => p.pinned);
+  const unpinned = copy.filter((p) => !p.pinned);
+
+  const sortFn = {
+    recent: (a, b) => new Date(b.updatedAt) - new Date(a.updatedAt),
+    "name-asc": (a, b) => a.name.localeCompare(b.name),
+    "name-desc": (a, b) => b.name.localeCompare(a.name),
+  };
+
+  pinned.sort(sortFn[projectSortMode] || sortFn.recent);
+  unpinned.sort(sortFn[projectSortMode] || sortFn.recent);
+  return [...pinned, ...unpinned];
+}
+
+/* --- Persistence (stubs — implemented in later commit) --- */
+
+function saveProjects() {
+  try {
+    localStorage.setItem("aicalc-projects", JSON.stringify(projects));
+  } catch (_) { /* ignore */ }
+}
+
+function loadProjects() {
+  try {
+    const raw = localStorage.getItem("aicalc-projects");
+    if (raw) { projects = JSON.parse(raw); return true; }
+  } catch (_) { /* ignore */ }
+  return false;
+}
+
+/* --- Bind events (stub — implemented in later commits) --- */
+
+function bindProjectsListEvents() { /* will be implemented */ }
+
 /* --- Nav buttons (demo active state + page switching) --- */
 
 navButtons.forEach((btn) => {
@@ -534,8 +681,16 @@ navButtons.forEach((btn) => {
     /* Page switching */
     if (target === "projects") {
       body.classList.add("page-projects");
+      renderProjectsPage();
     } else {
       body.classList.remove("page-projects");
     }
   });
 });
+
+/* --- Initialize projects --- */
+
+if (!loadProjects()) {
+  seedProjects();
+  saveProjects();
+}
