@@ -447,6 +447,35 @@ document.addEventListener("click", (e) => {
 
 const projectsViewEl = document.getElementById("projectsView");
 
+/* ============================================================
+   Projects: data model, state, and rendering
+   ============================================================ */
+
+let projects = [];
+let currentProjectId = null;
+let projectSearchQuery = "";
+let projectSortMode = "recent"; // "recent" | "name-asc" | "name-desc"
+
+function generateId() {
+  return Date.now().toString(36) + Math.random().toString(36).slice(2, 8);
+}
+
+function createProjectData(name, description) {
+  const now = new Date().toISOString();
+  return {
+    id: generateId(),
+    name: name.trim(),
+    description: (description || "").trim(),
+    pinned: false,
+    createdAt: now,
+    updatedAt: now,
+    instructions: "",
+    contextFiles: [],
+  };
+}
+
+/* --- Nav buttons (demo active state + page switching) --- */
+
 navButtons.forEach((btn) => {
   btn.addEventListener("click", () => {
     const target = btn.dataset.nav;
