@@ -445,6 +445,9 @@ document.addEventListener("click", (e) => {
 
 /* --- Nav buttons (demo active state) --- */
 
+// INTEGRATION: nav click handler will also trigger page switching
+// data-nav="home" → show calculator, data-nav="projects" → show projects page
+
 navButtons.forEach((btn) => {
   btn.addEventListener("click", () => {
     navButtons.forEach((b) => {
