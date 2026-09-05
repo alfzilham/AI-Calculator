@@ -1029,7 +1029,7 @@ function loadProjects() {
   return false;
 }
 
-/* --- Bind events (stub — implemented in later commits) --- */
+/* --- Bind events --- */
 
 function bindProjectsListEvents() {
   const searchBtn = document.getElementById("projectsSearchBtn");
