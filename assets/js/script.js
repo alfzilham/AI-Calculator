@@ -619,6 +619,13 @@ function escapeHtml(str) {
   return div.innerHTML;
 }
 
+/* --- Project detail (stub — implemented in commit 14) --- */
+
+function openProjectDetail(id) {
+  currentProjectId = id;
+  /* Detail view rendering will be added in commit 14 */
+}
+
 /* --- Create project modal --- */
 
 const createOverlayEl = document.getElementById("createProjectOverlay");
@@ -665,6 +672,29 @@ if (createCancelBtn) createCancelBtn.addEventListener("click", closeCreateProjec
 if (createOverlayEl) {
   createOverlayEl.addEventListener("click", (e) => {
     if (e.target === createOverlayEl) closeCreateProjectModal();
+  });
+}
+
+if (createSubmitBtn) {
+  createSubmitBtn.addEventListener("click", () => {
+    if (!validateProjectName(createNameInput.value)) return;
+    const newProject = createProjectData(createNameInput.value, createDescInput.value);
+    projects.unshift(newProject);
+    saveProjects();
+    closeCreateProjectModal();
+    renderProjectsPage();
+    /* Open the newly created project */
+    openProjectDetail(newProject.id);
+  });
+}
+
+/* Enter in name input submits */
+if (createNameInput) {
+  createNameInput.addEventListener("keydown", (e) => {
+    if (e.key === "Enter") {
+      e.preventDefault();
+      createSubmitBtn.click();
+    }
   });
 }
 
