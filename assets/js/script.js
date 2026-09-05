@@ -619,11 +619,248 @@ function escapeHtml(str) {
   return div.innerHTML;
 }
 
-/* --- Project detail (stub — implemented in commit 14) --- */
+/* --- Project detail --- */
 
 function openProjectDetail(id) {
   currentProjectId = id;
-  /* Detail view rendering will be added in commit 14 */
+  const project = projects.find((p) => p.id === id);
+  if (!project) return;
+
+  const container = projectsViewEl.querySelector(".projects-container");
+  if (!container) return;
+
+  container.innerHTML = `
+    <nav class="projects-breadcrumb" aria-label="Breadcrumb">
+      <button class="projects-breadcrumb-link" data-nav-back="projects">Projects</button>
+      <svg class="projects-breadcrumb-sep" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><polyline points="9 18 15 12 9 6"></polyline></svg>
+      <span class="projects-breadcrumb-current" aria-current="page">${escapeHtml(project.name)}</span>
+    </nav>
+
+    <div class="projects-detail-header">
+      <div class="projects-detail-title-row">
+        <h1 class="projects-detail-title">${escapeHtml(project.name)}</h1>
+        <div class="projects-detail-actions">
+          <button class="project-card-pin${project.pinned ? " pinned" : ""}" data-pin-id="${project.id}" aria-label="${project.pinned ? "Unpin" : "Pin"} project" title="${project.pinned ? "Unpin" : "Pin"}">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="${project.pinned ? "currentColor" : "none"}" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><line x1="12" x2="12" y1="17" y2="22"></line><path d="M5 17h14v-1.76a2 2 0 0 0-1.11-1.79l-1.78-.9A2 2 0 0 1 15 10.76V6h1a2 2 0 0 0 0-4H8a2 2 0 0 0 0 4h1v4.76a2 2 0 0 1-1.11 1.79l-1.78.9A2 2 0 0 0 5 15.24Z"></path></svg>
+          </button>
+          <div class="project-card-menu-wrapper">
+            <button class="project-card-menu" data-menu-id="${project.id}" aria-label="More options" aria-haspopup="menu" aria-expanded="false">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="1"></circle><circle cx="19" cy="12" r="1"></circle><circle cx="5" cy="12" r="1"></circle></svg>
+            </button>
+            <div class="project-card-menu-dropdown" data-menu-dropdown-id="${project.id}" role="menu" hidden>
+              <button class="project-card-menu-item" role="menuitem" data-action="rename" data-rename-id="${project.id}">Rename</button>
+              <button class="project-card-menu-item project-card-menu-item-danger" role="menuitem" data-action="delete" data-delete-id="${project.id}">Delete</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      ${project.description ? `<p class="projects-detail-desc">${escapeHtml(project.description)}</p>` : ""}
+    </div>
+
+    <div class="projects-detail-body">
+      <div class="projects-chat-area">
+        <div class="projects-chat-messages" id="chatMessages">
+          <div class="projects-chat-empty">
+            <p class="projects-chat-empty-text">This is a dedicated workspace for <strong>${escapeHtml(project.name)}</strong>.</p>
+            <p class="projects-chat-empty-hint">Ask anything to get started.</p>
+          </div>
+        </div>
+        <div class="projects-chat-composer">
+          <div class="projects-chat-composer-row">
+            <button class="projects-chat-attach" aria-label="Attach file" title="Attach file">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m21.44 11.05-9.19 9.19a6 6 0 0 1-8.49-8.49l9.19-9.19a4 4 0 0 1 5.66 5.66l-9.2 9.19a2 2 0 0 1-2.83-2.83l8.49-8.48"></path></svg>
+            </button>
+            <div class="projects-chat-input-wrap">
+              <textarea class="projects-chat-input" id="chatInput" placeholder="How can I help you today?" rows="1" aria-label="Type your message"></textarea>
+            </div>
+            <button class="projects-chat-send" id="chatSendBtn" aria-label="Send message" title="Send">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><line x1="22" x2="11" y1="2" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
+            </button>
+          </div>
+          <div class="projects-chat-mode-row">
+            <div class="projects-chat-mode-toggle">
+              <button class="projects-chat-mode active" data-chat-mode="chat">Chat</button>
+              <button class="projects-chat-mode" data-chat-mode="cowork">Cowork</button>
+            </div>
+            <div class="projects-chat-model-select">
+              <select class="projects-chat-model" id="chatModelSelect" aria-label="Select model">
+                <option value="sonnet5">Sonnet 5</option>
+                <option value="medium">Medium</option>
+              </select>
+            </div>
+            <button class="projects-chat-voice" aria-label="Voice input" title="Voice input">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"></path><path d="M19 10v2a7 7 0 0 1-14 0v-2"></path><line x1="12" x2="12" y1="19" y2="22"></line></svg>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div class="projects-detail-panel">
+        <div class="projects-panel-section">
+          <h3 class="projects-panel-title">Instructions</h3>
+          <p class="projects-panel-desc">Add instructions to tailor responses</p>
+          <button class="projects-panel-add" id="addInstructionBtn" aria-label="Add instruction">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><line x1="12" x2="12" y1="5" y2="19"></line><line x1="5" x2="19" y1="12" y2="12"></line></svg>
+          </button>
+          <div class="projects-panel-content" id="instructionsContent">
+            ${project.instructions ? `<p class="projects-panel-text">${escapeHtml(project.instructions)}</p>` : ""}
+          </div>
+        </div>
+
+        <div class="projects-panel-section">
+          <h3 class="projects-panel-title">Memory <span class="projects-panel-badge">Only you</span></h3>
+          <p class="projects-panel-desc">Project memory will show here after a few chats.</p>
+        </div>
+
+        <div class="projects-panel-section">
+          <h3 class="projects-panel-title">Context</h3>
+          <div class="projects-panel-context-list" id="contextList">
+            ${project.contextFiles.length > 0
+              ? project.contextFiles.map((f) => `
+                <div class="projects-context-item">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false" class="projects-context-icon"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8Z"></path><polyline points="14 2 14 8 20 8"></polyline></svg>
+                  <span class="projects-context-name">${escapeHtml(f.name)}</span>
+                  <span class="projects-context-size">${f.size}</span>
+                </div>
+              `).join("")
+              : `<p class="projects-panel-empty">Add PDFs, documents, or other text to reference in this project.</p>`
+            }
+          </div>
+          <label class="projects-context-upload" for="contextFileInput">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="17 8 12 3 7 8"></polyline><line x1="12" x2="12" y1="3" y2="15"></line></svg>
+            <span>Upload file</span>
+            <input type="file" id="contextFileInput" accept=".pdf,.txt,.doc,.docx,.csv,.md" hidden aria-label="Upload context file">
+          </label>
+        </div>
+      </div>
+    </div>
+  `;
+
+  bindDetailEvents(project);
+}
+
+function bindDetailEvents(project) {
+  const container = projectsViewEl.querySelector(".projects-container");
+  if (!container) return;
+
+  /* Back navigation */
+  const breadcrumb = container.querySelector("[data-nav-back]");
+  if (breadcrumb) {
+    breadcrumb.addEventListener("click", () => {
+      currentProjectId = null;
+      renderProjectsPage();
+    });
+  }
+
+  /* Pin toggle */
+  const pinBtn = container.querySelector(".project-card-pin");
+  if (pinBtn) {
+    pinBtn.addEventListener("click", () => {
+      toggleProjectPin(project.id);
+      openProjectDetail(project.id);
+    });
+  }
+
+  /* Overflow menu */
+  const menuBtn = container.querySelector(".project-card-menu");
+  const menuDropdown = container.querySelector(".project-card-menu-dropdown");
+  if (menuBtn && menuDropdown) {
+    menuBtn.addEventListener("click", (e) => {
+      e.stopPropagation();
+      menuDropdown.hidden = !menuDropdown.hidden;
+      menuBtn.setAttribute("aria-expanded", String(!menuDropdown.hidden));
+    });
+  }
+
+  /* Menu actions */
+  container.querySelectorAll(".project-card-menu-item").forEach((item) => {
+    item.addEventListener("click", (e) => {
+      e.stopPropagation();
+      const action = item.dataset.action;
+      if (action === "rename") {
+        const newName = prompt("Rename project:", project.name);
+        if (newName && newName.trim() && newName.trim() !== project.name) {
+          project.name = newName.trim();
+          project.updatedAt = new Date().toISOString();
+          saveProjects();
+          openProjectDetail(project.id);
+        }
+      } else if (action === "delete") {
+        if (confirm(`Delete "${project.name}"? This cannot be undone.`)) {
+          projects = projects.filter((p) => p.id !== project.id);
+          saveProjects();
+          currentProjectId = null;
+          renderProjectsPage();
+        }
+      }
+    });
+  });
+
+  /* Chat mode toggle */
+  container.querySelectorAll(".projects-chat-mode").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      container.querySelectorAll(".projects-chat-mode").forEach((b) => b.classList.remove("active"));
+      btn.classList.add("active");
+    });
+  });
+
+  /* Chat send */
+  const chatInput = document.getElementById("chatInput");
+  const chatSendBtn = document.getElementById("chatSendBtn");
+  if (chatInput && chatSendBtn) {
+    chatSendBtn.addEventListener("click", () => sendDemoMessage(chatInput));
+    chatInput.addEventListener("keydown", (e) => {
+      if (e.key === "Enter" && !e.shiftKey) {
+        e.preventDefault();
+        sendDemoMessage(chatInput);
+      }
+    });
+    /* Auto-resize textarea */
+    chatInput.addEventListener("input", () => {
+      chatInput.style.height = "auto";
+      chatInput.style.height = Math.min(chatInput.scrollHeight, 120) + "px";
+    });
+  }
+
+  /* Add instruction */
+  const addInstructionBtn = document.getElementById("addInstructionBtn");
+  const instructionsContent = document.getElementById("instructionsContent");
+  if (addInstructionBtn && instructionsContent) {
+    addInstructionBtn.addEventListener("click", () => {
+      const text = prompt("Enter instructions for this project:", project.instructions || "");
+      if (text !== null) {
+        project.instructions = text.trim();
+        project.updatedAt = new Date().toISOString();
+        saveProjects();
+        instructionsContent.innerHTML = project.instructions
+          ? `<p class="projects-panel-text">${escapeHtml(project.instructions)}</p>`
+          : "";
+      }
+    });
+  }
+
+  /* Context file upload (demo) */
+  const contextFileInput = document.getElementById("contextFileInput");
+  const contextList = document.getElementById("contextList");
+  if (contextFileInput && contextList) {
+    contextFileInput.addEventListener("change", () => {
+      const file = contextFileInput.files[0];
+      if (!file) return;
+      const sizeStr = file.size < 1024 ? file.size + " B"
+        : file.size < 1048576 ? (file.size / 1024).toFixed(1) + " KB"
+        : (file.size / 1048576).toFixed(1) + " MB";
+      project.contextFiles.push({ name: file.name, size: sizeStr });
+      project.updatedAt = new Date().toISOString();
+      saveProjects();
+      openProjectDetail(project.id);
+    });
+  }
+
+  /* Close menus on outside click */
+  document.addEventListener("click", () => {
+    if (menuDropdown) menuDropdown.hidden = true;
+    if (menuBtn) menuBtn.setAttribute("aria-expanded", "false");
+  });
 }
 
 /* --- Create project modal --- */
