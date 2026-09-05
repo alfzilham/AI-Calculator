@@ -454,6 +454,7 @@ const projectsViewEl = document.getElementById("projectsView");
 let projects = [];
 let currentProjectId = null;
 let projectSearchQuery = "";
+let projectSearchOpen = false;
 let projectSortMode = "recent"; // "recent" | "name-asc" | "name-desc"
 
 function generateId() {
@@ -534,7 +535,7 @@ function renderProjectsPage() {
         <button class="projects-action-btn" id="projectsSearchBtn" aria-label="Search projects">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="11" cy="11" r="8"></circle><line x1="21" x2="16.65" y1="21" y2="16.65"></line></svg>
         </button>
-        <div class="projects-search-inline" id="projectsSearchInline" hidden>
+        <div class="projects-search-inline" id="projectsSearchInline"${projectSearchOpen ? "" : " hidden"}>
           <input type="search" class="projects-search-input" id="projectsSearchInput" placeholder="Search projects..." aria-label="Search projects">
           <button class="projects-search-clear" id="projectsSearchClear" aria-label="Clear search">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><line x1="18" x2="6" y1="6" y2="18"></line><line x1="6" x2="18" y1="6" y2="18"></line></svg>
@@ -1043,15 +1044,12 @@ function bindProjectsListEvents() {
   /* Search toggle */
   if (searchBtn && searchInline && searchInput) {
     searchBtn.addEventListener("click", () => {
-      const hidden = searchInline.hidden;
-      searchInline.hidden = !hidden;
-      if (!hidden) {
+      projectSearchOpen = !projectSearchOpen;
+      if (!projectSearchOpen) {
         projectSearchQuery = "";
-        searchInput.value = "";
-        renderProjectsPage();
-      } else {
-        searchInput.focus();
       }
+      renderProjectsPage();
+      if (projectSearchOpen) document.getElementById("projectsSearchInput")?.focus();
     });
 
     searchInput.addEventListener("input", () => {
@@ -1068,7 +1066,6 @@ function bindProjectsListEvents() {
     if (searchClear) {
       searchClear.addEventListener("click", () => {
         projectSearchQuery = "";
-        searchInput.value = "";
         renderProjectsPage();
         const newInput = document.getElementById("projectsSearchInput");
         if (newInput) newInput.focus();

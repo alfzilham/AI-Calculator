@@ -67,6 +67,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 
+- Projects search no longer collapses or loses its input while filtering or sorting the rendered project list.
 - `Escape` now closes the profile menu/sidebar before clearing the calculator, and calculator shortcuts no longer intercept text entered in the sidebar Search field.
 - Space is no longer globally blocked, preserving native keyboard activation for sidebar and calculator buttons.
 
