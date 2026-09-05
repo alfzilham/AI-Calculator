@@ -801,7 +801,7 @@ function bindProjectsListEvents() {
         const project = projects.find((p) => p.id === id);
         if (project) {
           const newName = prompt("Rename project:", project.name);
-          if (newName && newName.trim()) {
+          if (newName && newName.trim() && newName.trim() !== project.name) {
             project.name = newName.trim();
             project.updatedAt = new Date().toISOString();
             saveProjects();
@@ -810,7 +810,8 @@ function bindProjectsListEvents() {
         }
       } else if (action === "delete") {
         const id = item.dataset.deleteId;
-        if (confirm("Delete this project?")) {
+        const project = projects.find((p) => p.id === id);
+        if (project && confirm(`Delete "${project.name}"? This cannot be undone.`)) {
           projects = projects.filter((p) => p.id !== id);
           saveProjects();
           renderProjectsPage();
