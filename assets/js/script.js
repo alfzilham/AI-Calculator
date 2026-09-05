@@ -663,7 +663,151 @@ function loadProjects() {
 
 /* --- Bind events (stub — implemented in later commits) --- */
 
-function bindProjectsListEvents() { /* will be implemented */ }
+function bindProjectsListEvents() {
+  const searchBtn = document.getElementById("projectsSearchBtn");
+  const searchInline = document.getElementById("projectsSearchInline");
+  const searchInput = document.getElementById("projectsSearchInput");
+  const searchClear = document.getElementById("projectsSearchClear");
+  const sortBtn = document.getElementById("projectsSortBtn");
+  const sortMenu = document.getElementById("projectsSortMenu");
+  const newBtn = document.getElementById("projectsNewBtn");
+
+  /* Search toggle */
+  if (searchBtn && searchInline && searchInput) {
+    searchBtn.addEventListener("click", () => {
+      const hidden = searchInline.hidden;
+      searchInline.hidden = !hidden;
+      if (!hidden) {
+        projectSearchQuery = "";
+        searchInput.value = "";
+        renderProjectsPage();
+      } else {
+        searchInput.focus();
+      }
+    });
+
+    searchInput.addEventListener("input", () => {
+      projectSearchQuery = searchInput.value;
+      renderProjectsPage();
+      /* Restore focus and cursor position after re-render */
+      const newInput = document.getElementById("projectsSearchInput");
+      if (newInput) {
+        newInput.focus();
+        newInput.setSelectionRange(newInput.value.length, newInput.value.length);
+      }
+    });
+
+    if (searchClear) {
+      searchClear.addEventListener("click", () => {
+        projectSearchQuery = "";
+        searchInput.value = "";
+        renderProjectsPage();
+        const newInput = document.getElementById("projectsSearchInput");
+        if (newInput) newInput.focus();
+      });
+    }
+  }
+
+  /* Sort dropdown */
+  if (sortBtn && sortMenu) {
+    sortBtn.addEventListener("click", (e) => {
+      e.stopPropagation();
+      sortMenu.hidden = !sortMenu.hidden;
+    });
+
+    sortMenu.querySelectorAll(".projects-sort-option").forEach((opt) => {
+      opt.addEventListener("click", () => {
+        projectSortMode = opt.dataset.sort;
+        sortMenu.hidden = true;
+        renderProjectsPage();
+      });
+    });
+  }
+
+  /* Close sort menu on outside click */
+  document.addEventListener("click", (e) => {
+    if (sortMenu && !sortMenu.hidden && !sortBtn.contains(e.target) && !sortMenu.contains(e.target)) {
+      sortMenu.hidden = true;
+    }
+  });
+
+  /* New project button */
+  if (newBtn) {
+    newBtn.addEventListener("click", openCreateProjectModal);
+  }
+
+  /* Card click → open detail */
+  document.querySelectorAll(".project-card").forEach((card) => {
+    card.addEventListener("click", (e) => {
+      if (e.target.closest(".project-card-pin") || e.target.closest(".project-card-menu")) return;
+      openProjectDetail(card.dataset.projectId);
+    });
+    card.addEventListener("keydown", (e) => {
+      if (e.key === "Enter" || e.key === " ") {
+        e.preventDefault();
+        openProjectDetail(card.dataset.projectId);
+      }
+    });
+  });
+
+  /* Pin buttons */
+  document.querySelectorAll(".project-card-pin").forEach((btn) => {
+    btn.addEventListener("click", (e) => {
+      e.stopPropagation();
+      toggleProjectPin(btn.dataset.pinId);
+    });
+  });
+
+  /* Overflow menu */
+  document.querySelectorAll(".project-card-menu").forEach((btn) => {
+    btn.addEventListener("click", (e) => {
+      e.stopPropagation();
+      const id = btn.dataset.menuId;
+      const dropdown = document.querySelector(`[data-menu-dropdown-id="${id}"]`);
+      if (dropdown) {
+        const wasHidden = dropdown.hidden;
+        /* Close all other dropdowns first */
+        document.querySelectorAll(".project-card-menu-dropdown").forEach((d) => { d.hidden = true; });
+        dropdown.hidden = !wasHidden;
+        btn.setAttribute("aria-expanded", String(!wasHidden));
+      }
+    });
+  });
+
+  /* Close overflow menus on outside click */
+  document.addEventListener("click", () => {
+    document.querySelectorAll(".project-card-menu-dropdown").forEach((d) => { d.hidden = true; });
+    document.querySelectorAll(".project-card-menu").forEach((b) => { b.setAttribute("aria-expanded", "false"); });
+  });
+
+  /* Menu item actions */
+  document.querySelectorAll(".project-card-menu-item").forEach((item) => {
+    item.addEventListener("click", (e) => {
+      e.stopPropagation();
+      const action = item.dataset.action;
+      if (action === "rename") {
+        const id = item.dataset.renameId;
+        const project = projects.find((p) => p.id === id);
+        if (project) {
+          const newName = prompt("Rename project:", project.name);
+          if (newName && newName.trim()) {
+            project.name = newName.trim();
+            project.updatedAt = new Date().toISOString();
+            saveProjects();
+            renderProjectsPage();
+          }
+        }
+      } else if (action === "delete") {
+        const id = item.dataset.deleteId;
+        if (confirm("Delete this project?")) {
+          projects = projects.filter((p) => p.id !== id);
+          saveProjects();
+          renderProjectsPage();
+        }
+      }
+    });
+  });
+}
 
 /* --- Nav buttons (demo active state + page switching) --- */
 
