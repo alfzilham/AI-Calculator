@@ -538,7 +538,7 @@ function renderProjectsPage() {
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="11" cy="11" r="8"></circle><line x1="21" x2="16.65" y1="21" y2="16.65"></line></svg>
         </button>
         <div class="projects-search-inline" id="projectsSearchInline"${projectSearchOpen ? "" : " hidden"}>
-          <input type="search" class="projects-search-input" id="projectsSearchInput" placeholder="Search projects..." aria-label="Search projects">
+          <input type="search" class="projects-search-input" id="projectsSearchInput" placeholder="Search projects..." aria-label="Search projects" value="${escapeHtml(projectSearchQuery)}">
           <button class="projects-search-clear" id="projectsSearchClear" aria-label="Clear search">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><line x1="18" x2="6" y1="6" y2="18"></line><line x1="6" x2="18" y1="6" y2="18"></line></svg>
           </button>

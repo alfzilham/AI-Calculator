@@ -8,7 +8,7 @@ A **vanilla HTML/CSS/JS** calculator with no framework and no build tools. Inspi
 - Convenience buttons: backspace (`⌫`), clear entry (`CE`), square (`×²`), and square root (`√`)
 - Two themes: **dark** & **light**, toggled via the theme icon in the top-left corner
 - **Sidebar navigation** with glassmorphism styling, user profile dropdown, and mobile drawer overlay
-- **Projects page** (demo): create, browse, search, sort, pin, and open projects with a chat composer, instructions, context upload, and memory panel; search stays open while results update
+- **Projects page** (demo): create, browse, search, sort, pin, and open projects with a chat composer, instructions, context upload, and memory panel; search stays open and preserves its query while results update
 - **Gradient waves** background reactive to the cursor (parallax) — automatically stops when the tab is inactive or the canvas is off-screen
 - Number formatting with thousands separators, result precision capped to avoid floating-point artifacts
 - Result font auto-scales so long numbers (up to 12 digits) always fit without truncation
