@@ -1837,8 +1837,8 @@ body[data-theme="light"] .projects-panel-section {
   font-weight: 600;
   padding: 2px 6px;
   border-radius: 4px;
-  background: var(--sidebar-hover-bg);
-  color: var(--sidebar-text-dim);
+  background: var(--sidebar-active-bg);
+  color: var(--sidebar-active-color);
   text-transform: uppercase;
   letter-spacing: 0.5px;
 }
