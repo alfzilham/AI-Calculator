@@ -474,6 +474,50 @@ function createProjectData(name, description) {
   };
 }
 
+/* --- Demo seed data --- */
+
+const SEED_PROJECTS = [
+  {
+    name: "AI Calculator",
+    description: "A vanilla HTML/CSS/JS calculator with glassmorphism and gradient waves background.",
+    pinned: true,
+    instructions: "Build a calculator using only vanilla web technologies.",
+    contextFiles: [{ name: "calculator-spec.pdf", size: "24 KB" }],
+  },
+  {
+    name: "Study Planner",
+    description: "Plan and track study sessions with time blocks and progress indicators.",
+    pinned: false,
+    instructions: "",
+    contextFiles: [],
+  },
+  {
+    name: "Budget Analyzer",
+    description: "Analyze monthly expenses, categorize spending, and visualize budget trends.",
+    pinned: false,
+    instructions: "Help me understand where my money goes each month.",
+    contextFiles: [{ name: "expenses-q3.csv", size: "12 KB" }],
+  },
+  {
+    name: "Prompt Workspace",
+    description: "A space for crafting, testing, and refining AI prompts for various use cases.",
+    pinned: false,
+    instructions: "",
+    contextFiles: [],
+  },
+];
+
+function seedProjects() {
+  projects = SEED_PROJECTS.map((s) => {
+    const p = createProjectData(s.name, s.description);
+    p.pinned = s.pinned;
+    p.instructions = s.instructions || "";
+    p.contextFiles = s.contextFiles || [];
+    p.updatedAt = new Date(Date.now() - Math.random() * 7 * 86400000).toISOString();
+    return p;
+  });
+}
+
 /* --- Nav buttons (demo active state + page switching) --- */
 
 navButtons.forEach((btn) => {
