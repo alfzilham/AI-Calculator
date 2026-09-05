@@ -303,7 +303,9 @@ function flashButton(selector) {
 document.addEventListener("keydown", (e) => {
   if (e.key === "Escape") {
     e.preventDefault();
-    if (profileMenuOpen) {
+    if (createOverlayEl && !createOverlayEl.hidden) {
+      closeCreateProjectModal();
+    } else if (profileMenuOpen) {
       closeProfileMenu();
     } else if (sidebarOpen) {
       closeSidebar();
@@ -947,6 +949,24 @@ if (createOverlayEl) {
   createOverlayEl.addEventListener("click", (e) => {
     if (e.target === createOverlayEl) closeCreateProjectModal();
   });
+
+  createOverlayEl.addEventListener("keydown", (e) => {
+    if (e.key !== "Tab") return;
+    const focusable = [...createOverlayEl.querySelectorAll(
+      "button:not([disabled]), input:not([disabled]), textarea:not([disabled]), select:not([disabled]), [href]"
+    )].filter((el) => !el.hidden && el.offsetParent !== null);
+    if (focusable.length === 0) return;
+
+    const first = focusable[0];
+    const last = focusable[focusable.length - 1];
+    if (e.shiftKey && document.activeElement === first) {
+      e.preventDefault();
+      last.focus();
+    } else if (!e.shiftKey && document.activeElement === last) {
+      e.preventDefault();
+      first.focus();
+    }
+  });
 }
 
 if (createSubmitBtn) {
@@ -1020,7 +1040,32 @@ function saveProjects() {
 function loadProjects() {
   try {
     const raw = localStorage.getItem("aicalc-projects");
-    if (raw) { projects = JSON.parse(raw); return true; }
+    if (!raw) return false;
+
+    const parsed = JSON.parse(raw);
+    if (!Array.isArray(parsed)) return false;
+
+    const now = new Date().toISOString();
+    projects = parsed
+      .filter((project) => project && typeof project === "object")
+      .map((project) => ({
+        id: String(project.id || generateId()),
+        name: String(project.name || "Untitled project").trim(),
+        description: String(project.description || "").trim(),
+        pinned: Boolean(project.pinned),
+        createdAt: project.createdAt || now,
+        updatedAt: project.updatedAt || now,
+        instructions: String(project.instructions || ""),
+        contextFiles: Array.isArray(project.contextFiles)
+          ? project.contextFiles
+              .filter((file) => file && typeof file === "object")
+              .map((file) => ({
+                name: String(file.name || "Untitled file"),
+                size: String(file.size || ""),
+              }))
+          : [],
+      }));
+    return true;
   } catch (_) { /* ignore */ }
   return false;
 }

@@ -118,6 +118,12 @@ Concise decision log. See `docs/ARCHITECTURE.md` for the resulting structure and
 - **Decision:** Store projects array as JSON in `localStorage` under key `aicalc-projects`. Wrap all access in try/catch for environments where localStorage is unavailable (private browsing, quota exceeded). Fall back to seed data on first load.
 - **Consequence:** Projects persist across sessions with zero server dependency; data loss is possible if the user clears browser storage.
 
+### ADR-014 — Guard dynamic Projects state and modal focus
+
+- **Context:** Projects re-render dynamic controls frequently, while browser storage and modal interactions can contain invalid or incomplete state.
+- **Decision:** Use one stable outside-click listener, normalize persisted project records before rendering, and keep focus inside the Create Project modal until it closes.
+- **Consequence:** Repeated navigation does not accumulate handlers, malformed local data does not break the page, and keyboard users can complete or dismiss the modal predictably.
+
 ## 4. Conventions
 
 **Language & naming**

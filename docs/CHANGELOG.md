@@ -69,6 +69,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Projects search no longer collapses or loses its input while filtering or sorting the rendered project list.
 - Dynamic Projects menus now use one stable outside-click listener instead of registering new document listeners on every render.
+- Create Project now closes on Escape, traps focus while open, and safely normalizes malformed persisted project data.
 - `Escape` now closes the profile menu/sidebar before clearing the calculator, and calculator shortcuts no longer intercept text entered in the sidebar Search field.
 - Space is no longer globally blocked, preserving native keyboard activation for sidebar and calculator buttons.
 

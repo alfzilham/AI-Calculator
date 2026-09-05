@@ -162,8 +162,9 @@ flowchart LR
 | `toggleSidebar`     | Toggles sidebar open/closed.                                                                              |
 | `toggleProfileMenu` | Toggles the profile dropdown menu.                                                                        |
 | `closeProfileMenu`  | Closes the profile dropdown menu.                                                                         |
+| `loadProjects`      | Loads and normalizes persisted project data, falling back safely when storage is invalid.                |
 
-Dynamic Projects list/detail menus share one document-level outside-click listener so repeated view renders do not accumulate event handlers.
+Dynamic Projects list/detail menus share one document-level outside-click listener so repeated view renders do not accumulate event handlers. The Create Project modal owns a small focus loop and closes cleanly on Escape.
 
 ### 4.2 `gradient-waves.js` — Self-contained WebGL2 Background
 

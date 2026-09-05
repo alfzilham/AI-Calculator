@@ -14,7 +14,7 @@ A **vanilla HTML/CSS/JS** calculator with no framework and no build tools. Inspi
 - Result font auto-scales so long numbers (up to 12 digits) always fit without truncation
 - Full keyboard support
 - Responsive (mobile-first)
-- **localStorage** persistence for projects data
+- **localStorage** persistence for projects data with safe normalization when stored data is malformed
 - Projects list controls remain stable while filtering, sorting, and re-rendering project cards.
 
 ## Running

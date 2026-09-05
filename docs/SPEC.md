@@ -128,14 +128,14 @@ The app is a single-page calculator supporting the four basic arithmetic operati
 | FR-57 | Pin/unpin toggles project pinned state; pinned projects sort before unpinned.                         | `toggleProjectPin()`               |
 | FR-58 | Overflow menu offers Rename (via prompt) and Delete (via confirm).                                   | `bindProjectsListEvents()`         |
 | FR-59 | "New project" opens a glassmorphism modal with name input (required), description textarea, Cancel and Create buttons. | `openCreateProjectModal()` |
-| FR-60 | Modal validates name is non-empty; focuses name input on open; returns focus to trigger on close.     | `validateProjectName()` / `closeCreateProjectModal()` |
+| FR-60 | Modal validates name is non-empty; focuses name input on open; traps focus while open; returns focus to trigger on close. | `validateProjectName()` / modal handlers |
 | FR-61 | Escape and backdrop click close the modal.                                                           | Modal event handlers               |
 | FR-62 | Clicking a project card opens the detail page with breadcrumb, title, description, pin/menu, chat composer, and right panel. | `openProjectDetail()` |
 | FR-63 | Breadcrumb "Projects / Name" links back to the projects list.                                        | `data-nav-back` handler            |
 | FR-64 | Chat composer accepts text input; Enter sends, Shift+Enter adds newline; demo auto-reply after 800ms loading. | `sendDemoMessage()` |
 | FR-65 | Chat area includes mode toggle (Chat/Cowork), model selector (Sonnet 5/Medium), voice button, attachment button. | `openProjectDetail()` template |
 | FR-66 | Right panel has Instructions (add/edit via prompt), Memory ("Only you" badge, demo), Context (file upload demo with name/size display). | `bindDetailEvents()` |
-| FR-67 | Projects data persists to localStorage with try/catch fallback.                                      | `saveProjects()` / `loadProjects()` |
+| FR-67 | Projects data persists to localStorage with try/catch fallback and malformed data is normalized safely. | `saveProjects()` / `loadProjects()` |
 | FR-68 | Demo seed data includes AI Calculator, Study Planner, Budget Analyzer, Prompt Workspace.              | `SEED_PROJECTS` / `seedProjects()`  |
 | FR-69 | Projects page is responsive: single-column cards on mobile, detail body single-column on mobile.      | `responsive.css`                   |
 | FR-70 | Projects page uses glassmorphism cards consistent with calculator card styling.                       | `components.css` project card styles|
