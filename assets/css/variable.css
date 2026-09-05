@@ -77,6 +77,10 @@ body[data-theme="dark"] {
   --sidebar-active-color: #ffb75c;
   --sidebar-profile-bg: rgba(255, 255, 255, 0.05);
   --sidebar-profile-border: 1px solid rgba(255, 255, 255, 0.06);
+
+  /* Projects */
+  --projects-card-bg: var(--card-bg);
+  --projects-card-border: var(--card-border);
 }
 
 /* ===== Mode Light ===== */
@@ -144,4 +148,8 @@ body[data-theme="light"] {
   --sidebar-active-color: #ec9426;
   --sidebar-profile-bg: rgba(0, 0, 0, 0.03);
   --sidebar-profile-border: 1px solid rgba(0, 0, 0, 0.06);
+
+  /* Projects */
+  --projects-card-bg: var(--card-bg);
+  --projects-card-border: var(--card-border);
 }

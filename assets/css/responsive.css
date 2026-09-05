@@ -68,3 +68,63 @@ body.sidebar-open {
     display: none;
   }
 }
+
+/* ===== Projects responsive ===== */
+
+@media (max-width: 768px) {
+  .projects-detail-body {
+    grid-template-columns: 1fr;
+  }
+
+  .projects-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .projects-actions {
+    width: 100%;
+    flex-wrap: wrap;
+  }
+
+  .projects-search-input {
+    width: 140px;
+  }
+
+  .projects-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .modal {
+    width: 92%;
+    max-width: none;
+    margin: 16px;
+    max-height: 90vh;
+    overflow-y: auto;
+  }
+}
+
+@media (max-width: 360px) {
+  .projects-view {
+    padding: 16px 12px;
+  }
+
+  .projects-title {
+    font-size: 24px;
+  }
+
+  .projects-new-btn span {
+    display: none;
+  }
+
+  .projects-new-btn {
+    padding: 8px 10px;
+  }
+
+  .projects-detail-title {
+    font-size: 22px;
+  }
+
+  .projects-chat-mode-row {
+    flex-wrap: wrap;
+  }
+}
