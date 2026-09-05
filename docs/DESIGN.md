@@ -135,7 +135,7 @@ Current grid layout (4×6, no empty cells):
 
 ## 4. Style Implementation Details
 
-### 4.1 Glassmorphism — Calculator Card & Sidebar
+### 4.1 Glassmorphism — Calculator Card, Sidebar & Projects
 
 ```css
 .calculator {
@@ -146,6 +146,11 @@ Current grid layout (4×6, no empty cells):
 .sidebar-inner {
   -webkit-backdrop-filter: blur(28px) saturate(160%);
   backdrop-filter: blur(28px) saturate(160%);
+}
+
+.project-card {
+  -webkit-backdrop-filter: blur(20px) saturate(150%);
+  backdrop-filter: blur(20px) saturate(150%);
 }
 ```
 

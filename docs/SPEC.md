@@ -101,9 +101,9 @@ The app is a single-page calculator supporting the four basic arithmetic operati
 | ----- | ---------------------------------------------------------------------------------------------------- | ------------------------------ |
 | FR-36 | Sidebar displays brand "AI Calculator" with icon at the top.                                         | `index.html` sidebar-brand     |
 | FR-37 | Search bar with placeholder "Search" and inline SVG search icon is displayed below brand.            | `index.html` sidebar-search    |
-| FR-38 | Navigation menu includes Home (active), AI Chatbot (demo), Projects (demo), Settings (demo).         | `index.html` sidebar-nav       |
+| FR-38 | Navigation menu includes Home (active), AI Chatbot (demo), Projects, Settings (demo).                | `index.html` sidebar-nav       |
 | FR-39 | Home nav item has `aria-current="page"` and visual active state (background + left indicator bar).   | `index.html` + `components.css`|
-| FR-40 | Demo nav items (Chatbot, Projects, Settings) display a "Demo" badge.                                | `index.html` sidebar-nav-badge |
+| FR-40 | Demo nav items (Chatbot, Settings) display a "Demo" badge.                                          | `index.html` sidebar-nav-badge |
 | FR-41 | Sidebar toggle button is fixed to the top-left of the viewport while closed, moves into the sidebar header beside the brand when open, and has `aria-label`/`aria-expanded`; it animates from hamburger to X. | `index.html` / `components.css` |
 | FR-42 | Sidebar opens/closes with smooth CSS transform transition.                                           | `openSidebar()`/`closeSidebar()`|
 | FR-43 | On desktop (`≥769px`), sidebar slides from left as a side panel; calculator shifts right.            | `responsive.css`               |
@@ -114,6 +114,31 @@ The app is a single-page calculator supporting the four basic arithmetic operati
 | FR-48 | Profile dropdown shows Settings, Upgrade plan, and Log out menu items on click.                      | `toggleProfileMenu()`          |
 | FR-49 | Sidebar is compatible with dark and light themes via CSS custom properties.                           | `variable.css` sidebar tokens  |
 | FR-50 | Sidebar uses glassmorphism: semi-transparent background, backdrop blur, border, shadow.              | `components.css`               |
+
+### 2.10 Projects Page (Demo)
+
+| ID    | Requirement                                                                                          | Implementation                      |
+| ----- | ---------------------------------------------------------------------------------------------------- | ----------------------------------- |
+| FR-51 | Clicking "Projects" in sidebar nav shows the projects page and hides the calculator.                 | `body.page-projects` + `renderProjectsPage()` |
+| FR-52 | Clicking "Home" in sidebar nav returns to the calculator view.                                       | `body.classList.remove("page-projects")` |
+| FR-53 | Projects page displays a header with "Projects" title, search button, sort button, and "New project" button. | `renderProjectsPage()` |
+| FR-54 | Search input filters projects by name or description; empty state shown when no matches.              | `filterProjects()`                 |
+| FR-55 | Sort dropdown offers Recently updated, Name A–Z, Name Z–A; pinned projects always sort first.        | `sortProjects()`                   |
+| FR-56 | Project cards display name, description (2-line clamp), last updated time, pin toggle, and overflow menu. | `renderProjectCard()` |
+| FR-57 | Pin/unpin toggles project pinned state; pinned projects sort before unpinned.                         | `toggleProjectPin()`               |
+| FR-58 | Overflow menu offers Rename (via prompt) and Delete (via confirm).                                   | `bindProjectsListEvents()`         |
+| FR-59 | "New project" opens a glassmorphism modal with name input (required), description textarea, Cancel and Create buttons. | `openCreateProjectModal()` |
+| FR-60 | Modal validates name is non-empty; focuses name input on open; returns focus to trigger on close.     | `validateProjectName()` / `closeCreateProjectModal()` |
+| FR-61 | Escape and backdrop click close the modal.                                                           | Modal event handlers               |
+| FR-62 | Clicking a project card opens the detail page with breadcrumb, title, description, pin/menu, chat composer, and right panel. | `openProjectDetail()` |
+| FR-63 | Breadcrumb "Projects / Name" links back to the projects list.                                        | `data-nav-back` handler            |
+| FR-64 | Chat composer accepts text input; Enter sends, Shift+Enter adds newline; demo auto-reply after 800ms loading. | `sendDemoMessage()` |
+| FR-65 | Chat area includes mode toggle (Chat/Cowork), model selector (Sonnet 5/Medium), voice button, attachment button. | `openProjectDetail()` template |
+| FR-66 | Right panel has Instructions (add/edit via prompt), Memory ("Only you" badge, demo), Context (file upload demo with name/size display). | `bindDetailEvents()` |
+| FR-67 | Projects data persists to localStorage with try/catch fallback.                                      | `saveProjects()` / `loadProjects()` |
+| FR-68 | Demo seed data includes AI Calculator, Study Planner, Budget Analyzer, Prompt Workspace.              | `SEED_PROJECTS` / `seedProjects()`  |
+| FR-69 | Projects page is responsive: single-column cards on mobile, detail body single-column on mobile.      | `responsive.css`                   |
+| FR-70 | Projects page uses glassmorphism cards consistent with calculator card styling.                       | `components.css` project card styles|
 
 ---
 

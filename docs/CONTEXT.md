@@ -106,6 +106,18 @@ Concise decision log. See `docs/ARCHITECTURE.md` for the resulting structure and
 - **Decision:** Keep one toggle button in a viewport dock while closed, then move it into a dedicated sidebar-header dock when open. Animate its three centered horizontal lines into an X when open.
 - **Consequence:** The calculator top bar remains dedicated to calculator controls, the open-state button cannot be covered by the sidebar, and the button stays beside—not over—the brand.
 
+### ADR-012 — Projects page as SPA view switching
+
+- **Context:** The app needs a Projects page alongside the calculator without adding a router or framework. Both views share the same body, waves background, and sidebar.
+- **Decision:** Use `body.page-projects` class to toggle visibility between `.calculator` (hidden) and `.projects-view` (shown). All project rendering is done via JS (`renderProjectsPage()`, `openProjectDetail()`) injecting HTML into a container div. The sidebar nav buttons drive the switching.
+- **Consequence:** No page reload, no router dependency, calculator state is preserved when switching to Projects, and the waves background remains visible behind both views.
+
+### ADR-013 — Projects data persistence via localStorage
+
+- **Context:** Projects need to survive page refreshes but there is no backend. The app must work as a static file.
+- **Decision:** Store projects array as JSON in `localStorage` under key `aicalc-projects`. Wrap all access in try/catch for environments where localStorage is unavailable (private browsing, quota exceeded). Fall back to seed data on first load.
+- **Consequence:** Projects persist across sessions with zero server dependency; data loss is possible if the user clears browser storage.
+
 ## 4. Conventions
 
 **Language & naming**

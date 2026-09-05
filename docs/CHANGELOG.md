@@ -9,7 +9,38 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
-- Audited sidebar interactions and improved keyboard accessibility for the profile control and Search field.
+- Projects page (demo) with glassmorphism card grid, accessible from sidebar navigation.
+- Project data model with id, name, description, pinned, timestamps, instructions, and context files.
+- Demo seed data: AI Calculator, Study Planner, Budget Analyzer, Prompt Workspace projects.
+- Projects header with title, search toggle, sort dropdown (Recently updated, Name A–Z, Name Z–A), and "New project" button.
+- Project cards with name, description, last updated time, pin/unpin toggle, and overflow menu (rename, delete).
+- Create project modal with glassmorphism styling, name validation, description textarea, and Escape/backdrop close.
+- Project detail page with breadcrumb navigation, title, description, pin/menu actions.
+- Chat composer demo with message input, Enter/Shift+Enter support, auto-reply demo, loading dots animation, Chat/Cowork mode toggle, model selector, voice button, and attachment button.
+- Instructions panel with add/edit instruction via prompt demo.
+- Memory panel with "Only you" badge (demo placeholder).
+- Context panel with file upload demo (displays file name and size metadata), and empty state prompt.
+- localStorage persistence for projects (with fallback if unavailable).
+- Responsive layout: single-column cards on mobile, detail body collapses to single column.
+- Project-specific CSS design tokens: `--projects-card-bg`, `--projects-card-border`.
+- Breadcrumb navigation back to projects list from detail view.
+- Page switching between calculator and projects via sidebar nav (`body.page-projects`).
+- Sidebar navigation with glassmorphism styling, collapsible on desktop and drawer overlay on mobile.
+- Brand section with "AI Calculator" name and icon in the sidebar.
+- Search bar with inline SVG icon in the sidebar.
+- Navigation menu: Home (active), AI Chatbot (demo), Projects, Settings (demo) — all with inline SVG icons and semantic `<button>` elements.
+- Sticky user profile section at the bottom of the sidebar with avatar, name ("Alfiz"), plan status ("Free Plan"), and dropdown menu (Settings, Upgrade plan, Log out).
+- Sidebar toggle button (hamburger ↔ X) fixed to the viewport's top-left with aria-label and aria-expanded support.
+- Mobile overlay backdrop behind sidebar; click backdrop or press Escape to close.
+- Keyboard support: Escape key closes profile menu first, then sidebar.
+- Demo badges on AI Chatbot and Settings menu items.
+- New CSS design tokens for sidebar: `--sidebar-bg`, `--sidebar-border`, `--sidebar-shadow`, `--sidebar-text`, `--sidebar-text-dim`, `--sidebar-hover-bg`, `--sidebar-active-bg`, `--sidebar-active-color`, `--sidebar-profile-bg`, `--sidebar-profile-border`.
+- Hamburger icon animates to X when sidebar is open (CSS transform on SVG lines).
+- Backspace button (`⌫`) to delete the last digit on touch devices (previously keyboard-only).
+- Clear Entry button (`CE`) that clears only the current entry while keeping the pending operator and history.
+- Square (`×²`) and square root (`√`) buttons as unary operations.
+
+### Changed
 - Sidebar navigation with glassmorphism styling, collapsible on desktop and drawer overlay on mobile.
 - Brand section with "AI Calculator" name and icon in the sidebar.
 - Search bar with inline SVG icon in the sidebar.
