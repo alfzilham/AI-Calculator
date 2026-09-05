@@ -185,9 +185,35 @@
 
   </div>
 
-  <!-- PROJECTS_INJECTION_POINT: projects-view will be added here, sibling of .calculator -->
-  <!-- Nav integration: sidebar nav buttons with data-nav="projects" will trigger page switching -->
-  <!-- JS integration: renderProjectsPage(), openProjectDetail(), openCreateProjectModal() -->
+  <!-- Projects view (hidden by default, shown when body.page-projects) -->
+  <div class="projects-view" id="projectsView">
+    <div class="projects-container">
+      <!-- Projects list and detail views will be rendered here by JS -->
+    </div>
+  </div>
+
+  <!-- Create project modal -->
+  <div class="modal-overlay" id="createProjectOverlay" aria-hidden="true">
+    <div class="modal" id="createProjectModal" role="dialog" aria-modal="true" aria-labelledby="createProjectTitle">
+      <div class="modal-header">
+        <h2 class="modal-title" id="createProjectTitle">Create a project</h2>
+        <button class="modal-close" id="createProjectClose" aria-label="Close dialog">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><line x1="18" x2="6" y1="6" y2="18"></line><line x1="6" x2="18" y1="6" y2="18"></line></svg>
+        </button>
+      </div>
+      <div class="modal-body">
+        <label class="modal-label" for="projectNameInput">What are you working on?</label>
+        <input type="text" id="projectNameInput" class="modal-input" placeholder="Name your project" autocomplete="off">
+        <span class="modal-error" id="projectNameError" role="alert" aria-live="assertive"></span>
+        <label class="modal-label" for="projectDescInput">What are you trying to achieve?</label>
+        <textarea id="projectDescInput" class="modal-textarea" placeholder="Describe your project, goals, subject, etc..." rows="4"></textarea>
+      </div>
+      <div class="modal-footer">
+        <button class="modal-btn modal-btn-cancel" id="createProjectCancel">Cancel</button>
+        <button class="modal-btn modal-btn-primary" id="createProjectSubmit">Create project</button>
+      </div>
+    </div>
+  </div>
 
   <script src="assets/js/gradient-waves.js"></script>
   <script src="assets/js/script.js"></script>

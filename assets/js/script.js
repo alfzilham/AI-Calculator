@@ -443,18 +443,26 @@ document.addEventListener("click", (e) => {
   }
 });
 
-/* --- Nav buttons (demo active state) --- */
+/* --- Nav buttons (demo active state + page switching) --- */
 
-// INTEGRATION: nav click handler will also trigger page switching
-// data-nav="home" → show calculator, data-nav="projects" → show projects page
+const projectsViewEl = document.getElementById("projectsView");
 
 navButtons.forEach((btn) => {
   btn.addEventListener("click", () => {
+    const target = btn.dataset.nav;
+
     navButtons.forEach((b) => {
       b.classList.remove("active");
       b.removeAttribute("aria-current");
     });
     btn.classList.add("active");
     btn.setAttribute("aria-current", "page");
+
+    /* Page switching */
+    if (target === "projects") {
+      body.classList.add("page-projects");
+    } else {
+      body.classList.remove("page-projects");
+    }
   });
 });

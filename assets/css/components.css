@@ -736,3 +736,224 @@ body[data-theme="light"] .sidebar-profile-menu {
   background: var(--sidebar-hover-bg);
   margin: 4px 8px;
 }
+
+/* ===== Page switching ===== */
+
+body.page-projects .calculator {
+  display: none;
+}
+
+body:not(.page-projects) .projects-view {
+  display: none;
+}
+
+/* ===== Projects View Shell ===== */
+
+.projects-view {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  min-height: 100vh;
+  padding: 24px 16px;
+}
+
+.projects-container {
+  max-width: 960px;
+  margin: 0 auto;
+}
+
+/* ===== Modal Overlay ===== */
+
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 200;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s ease;
+  -webkit-backdrop-filter: blur(4px);
+  backdrop-filter: blur(4px);
+}
+
+.modal-overlay.active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.modal-overlay[hidden] {
+  display: none;
+}
+
+/* ===== Modal ===== */
+
+.modal {
+  width: 90%;
+  max-width: 480px;
+  border-radius: 20px;
+  padding: 28px;
+  transform: translateY(12px);
+  transition: transform 0.2s ease;
+  -webkit-backdrop-filter: blur(28px) saturate(160%);
+  backdrop-filter: blur(28px) saturate(160%);
+}
+
+.modal-overlay.active .modal {
+  transform: translateY(0);
+}
+
+body[data-theme="dark"] .modal,
+body[data-theme="light"] .modal {
+  background: var(--card-bg);
+  border: var(--card-border);
+  box-shadow: var(--card-shadow);
+}
+
+.modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 24px;
+}
+
+.modal-title {
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--result-color);
+  margin: 0;
+}
+
+.modal-close {
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  background: transparent;
+  color: var(--history-color);
+  transition: background 0.12s ease, color 0.12s ease;
+}
+
+.modal-close:hover {
+  background: var(--sidebar-hover-bg);
+  color: var(--result-color);
+}
+
+.modal-close:focus-visible {
+  outline: 2px solid var(--focus-ring);
+  outline-offset: 2px;
+}
+
+.modal-close svg {
+  width: 18px;
+  height: 18px;
+  stroke: currentColor;
+  fill: none;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.modal-body {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.modal-label {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--result-color);
+}
+
+.modal-input,
+.modal-textarea {
+  width: 100%;
+  padding: 10px 14px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.05);
+  color: var(--result-color);
+  font-size: 14px;
+  font-family: inherit;
+  outline: none;
+  transition: border-color 0.2s ease;
+}
+
+body[data-theme="light"] .modal-input,
+body[data-theme="light"] .modal-textarea {
+  border-color: rgba(0, 0, 0, 0.1);
+  background: rgba(0, 0, 0, 0.03);
+}
+
+.modal-input:focus,
+.modal-textarea:focus {
+  border-color: var(--focus-ring);
+}
+
+.modal-textarea {
+  resize: vertical;
+  min-height: 80px;
+}
+
+.modal-error {
+  font-size: 12px;
+  color: #ef4444;
+  min-height: 16px;
+}
+
+.modal-footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 24px;
+}
+
+.modal-btn {
+  padding: 10px 20px;
+  border-radius: 10px;
+  border: none;
+  font-size: 14px;
+  font-weight: 600;
+  font-family: inherit;
+  cursor: pointer;
+  transition: background 0.12s ease, transform 0.1s ease;
+}
+
+.modal-btn:active {
+  transform: scale(0.97);
+}
+
+.modal-btn:focus-visible {
+  outline: 2px solid var(--focus-ring);
+  outline-offset: 2px;
+}
+
+.modal-btn-cancel {
+  background: transparent;
+  color: var(--history-color);
+}
+
+.modal-btn-cancel:hover {
+  background: var(--sidebar-hover-bg);
+}
+
+body[data-theme="light"] .modal-btn-cancel {
+  color: rgba(50, 45, 35, 0.6);
+}
+
+.modal-btn-primary {
+  background: var(--btn-op-bg);
+  color: #fff;
+  box-shadow: var(--btn-op-shadow);
+}
+
+.modal-btn-primary:hover {
+  background: var(--btn-op-bg-active);
+}
