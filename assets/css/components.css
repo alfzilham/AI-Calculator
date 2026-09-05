@@ -1177,3 +1177,44 @@ body[data-theme="light"] .projects-sort-menu {
   stroke-linecap: round;
   stroke-linejoin: round;
 }
+
+/* ===== Projects Grid ===== */
+
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 16px;
+}
+
+/* ===== Projects Empty State ===== */
+
+.projects-empty {
+  grid-column: 1 / -1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 60px 20px;
+  text-align: center;
+}
+
+.projects-empty-icon {
+  width: 48px;
+  height: 48px;
+  stroke: var(--history-color);
+  fill: none;
+  margin-bottom: 16px;
+}
+
+.projects-empty-text {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--result-color);
+  margin: 0 0 4px;
+}
+
+.projects-empty-hint {
+  font-size: 14px;
+  color: var(--history-color);
+  margin: 0;
+}
